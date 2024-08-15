@@ -5,7 +5,7 @@ plugins {
 	id 'org.asciidoctor.jvm.convert' version '3.3.2'
 	id 'com.vaadin' version '24.4.8'
 	id 'checkstyle'
-	id 'com.github.spotbugs' version '6.0.20'
+	id 'com.github.spotbugs' version '6.0.18'
 }
 
 group = 'me.hoyeonj'
@@ -81,4 +81,17 @@ checkstyle {
 	toolVersion = '10.17.0'
 	configFile = rootProject.file('config/checkstyle/google-check.xml')
 	ignoreFailures = false
+}
+
+spotbugs {
+	toolVersion = '4.8.6'
+}
+
+
+tasks.spotbugsMain {
+	reports.create("html") {
+		required = true
+		outputLocation = file("$buildDir/reports/spotbugs.html")
+		setStylesheet("fancy-hist.xsl")
+	}
 }
