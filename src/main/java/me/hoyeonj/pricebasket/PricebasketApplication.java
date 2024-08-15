@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class PricebasketApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PricebasketApplication.class, args);
-	}
-
+  public static void main(String[] args) {
+    SpringApplication.run(PricebasketApplication.class, args);
+  }
 }
