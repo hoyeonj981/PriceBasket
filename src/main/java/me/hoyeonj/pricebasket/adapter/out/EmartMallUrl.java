@@ -1,5 +1,7 @@
 package me.hoyeonj.pricebasket.adapter.out;
 
+import java.util.Objects;
+
 enum EmartMallUrl {
 
   HTTPS_SEARCH_URL(
@@ -34,6 +36,8 @@ enum EmartMallUrl {
   }
 
   public String createSearchUrl(final String queryParameterValue) {
+    validateQueryParameter(queryParameterValue);
+
     var builder = new StringBuilder();
     builder.append(this.protocol.getValue());
     builder.append(this.domain);
@@ -54,5 +58,11 @@ enum EmartMallUrl {
 
     return builder.toString();
   }
-  //https://emart.ssg.com/search.ssg?target=all&query=%EA%B0%90%EC%9E%90&shpp=ssgem
+
+  private static void validateQueryParameter(final String queryParameterValue) {
+    if (Objects.isNull(queryParameterValue) || queryParameterValue.isBlank()) {
+      throw new InvalidQueryParameterException("유요하지 않는 Emart 쿼리 파라미터입니다. - "
+          + queryParameterValue);
+    }
+  }
 }
