@@ -38,7 +38,7 @@ enum EmartMallUrl {
   public String createSearchUrl(final String queryParameterValue) {
     validateQueryParameter(queryParameterValue);
 
-    var builder = new StringBuilder();
+    final var builder = new StringBuilder();
     builder.append(this.protocol.getValue());
     builder.append(this.domain);
     builder.append(PATH_DELIMETER);
