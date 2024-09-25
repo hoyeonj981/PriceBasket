@@ -1,16 +1,16 @@
 package me.hoyeonj.pricebasket.adapter.out;
 
-public class EmartHtmlFetcher {
+public class EmartMallHtmlFetcher {
 
   private static final EmartMallUrl SEARCH_URL = EmartMallUrl.HTTPS_SEARCH_URL;
 
   private final HttpClient client;
 
-  public EmartHtmlFetcher(final HttpClient client) {
+  public EmartMallHtmlFetcher(final HttpClient client) {
     this.client = client;
   }
 
-  public EmartHtmlDocument fetchFrom(final EmartMallSearchQuery query) {
+  public EmartMallHtmlDocument fetchFrom(final EmartMallSearchQuery query) {
     var uri = SEARCH_URL.createSearchUrl(query.query());
     var responseDocument = client.fetchFromUri(uri);
     if (!responseDocument.getContent().contains("<html>")) {
@@ -25,6 +25,6 @@ public class EmartHtmlFetcher {
       throw new InternalServerErrorException("해당 uri에 대한 요청을 서버에서 응답하지 않습니다. - "
           + responseDocument.getUrl());
     }
-    return new EmartHtmlDocument(responseDocument.getContent());
+    return new EmartMallHtmlDocument(responseDocument.getContent());
   }
 }

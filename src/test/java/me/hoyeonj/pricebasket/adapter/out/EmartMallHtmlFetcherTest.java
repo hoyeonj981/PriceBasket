@@ -10,13 +10,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-class EmartHtmlFetcherTest {
+class EmartMallHtmlFetcherTest {
 
   @Mock
   private HttpClient httpClient;
 
   @InjectMocks
-  private EmartHtmlFetcher fetcher;
+  private EmartMallHtmlFetcher fetcher;
 
   @BeforeEach
   void setUp() {
