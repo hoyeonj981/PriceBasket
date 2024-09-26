@@ -10,7 +10,7 @@ public class EmartMallHtmlFetcher {
     this.client = client;
   }
 
-  public EmartMallHtmlDocument fetchFrom(final EmartMallSearchQuery query) {
+  public HtmlDocument fetchFrom(final EmartMallSearchQuery query) {
     var uri = SEARCH_URL.createSearchUrl(query.query());
     var responseDocument = client.fetchFromUri(uri);
     if (!responseDocument.getContent().contains("<html>")) {
@@ -25,6 +25,6 @@ public class EmartMallHtmlFetcher {
       throw new InternalServerErrorException("해당 uri에 대한 요청을 서버에서 응답하지 않습니다. - "
           + responseDocument.getUrl());
     }
-    return new EmartMallHtmlDocument(responseDocument.getContent());
+    return new HtmlDocument(responseDocument.getContent());
   }
 }

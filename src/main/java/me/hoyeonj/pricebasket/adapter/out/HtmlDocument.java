@@ -1,10 +1,10 @@
 package me.hoyeonj.pricebasket.adapter.out;
 
-public class EmartMallHtmlDocument {
+public class HtmlDocument {
 
   private final String content;
 
-  public EmartMallHtmlDocument(final String content) {
+  public HtmlDocument(final String content) {
     this.content = content;
   }
 
