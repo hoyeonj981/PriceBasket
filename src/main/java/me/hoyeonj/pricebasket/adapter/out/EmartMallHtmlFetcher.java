@@ -4,9 +4,9 @@ public class EmartMallHtmlFetcher {
 
   private static final EmartMallUrl SEARCH_URL = EmartMallUrl.HTTPS_SEARCH_URL;
 
-  private final HttpClient client;
+  private final ApacheHttpClient client;
 
-  public EmartMallHtmlFetcher(final HttpClient client) {
+  public EmartMallHtmlFetcher(final ApacheHttpClient client) {
     this.client = client;
   }
 

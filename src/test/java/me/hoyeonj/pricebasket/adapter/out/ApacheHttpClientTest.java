@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class ApacheHttpClientTest {
 
-  private HttpClient apacheClient;
+  private ApacheHttpClient apacheClient;
 
   @Test
   void HTTP_요청을_보낼_수_없다면_예외가_발생한다() {

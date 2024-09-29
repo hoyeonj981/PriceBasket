@@ -13,7 +13,7 @@ import org.mockito.MockitoAnnotations;
 class EmartMallHtmlFetcherTest {
 
   @Mock
-  private HttpClient httpClient;
+  private ApacheHttpClient httpClient;
 
   @InjectMocks
   private EmartMallHtmlFetcher fetcher;
