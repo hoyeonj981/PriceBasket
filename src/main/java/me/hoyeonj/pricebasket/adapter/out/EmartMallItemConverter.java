@@ -3,7 +3,6 @@ package me.hoyeonj.pricebasket.adapter.out;
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.regex.Pattern;
-import org.jsoup.nodes.Element;
 
 public class EmartMallItemConverter {
 
@@ -13,7 +12,7 @@ public class EmartMallItemConverter {
   private static final String DETAILS_URL = "\"itemLnkd\":\"";
   private static final String DELIMITER = "\"";
 
-  public EmartMallItemInfo convert(final String text, final String imageUrl) {
+  public EmartMallItemInfo convert(final String text, String imageUrl) {
     if (Objects.isNull(text) || text.isBlank()) {
       throw new EmptyTextException("주어진 상품 텍스트가 비어 있습니다.");
     }
