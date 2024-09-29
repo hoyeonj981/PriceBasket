@@ -1,5 +1,8 @@
 package me.hoyeonj.pricebasket.adapter.out;
 
+import static me.hoyeonj.pricebasket.adapter.out.EmartMallItemInfoFixture.createItemInfoFixture;
+import static me.hoyeonj.pricebasket.adapter.out.EmartMallParser.*;
+import static me.hoyeonj.pricebasket.adapter.out.EmartMallTestHtml.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -29,18 +32,18 @@ class EmartMallParserTest {
 
   @Test
   void 주어진_상품_수에_맞게_파싱한다() {
-    HtmlDocument htmlDocument = new HtmlDocument("<html>test</html>");
-    when(htmlParser.getElementByCssQuery(anyString(), eq(EmartMallParser.ITEM_LIST_DIV_CSSQUERY)))
-        .thenReturn("<div class='tmpl_itemlist'>...</div>");
-    when(htmlParser.getElementsByCssQuery(anyString(), eq(EmartMallParser.ITEM_LIST_LI_CSSQUERY)))
-        .thenReturn(Arrays.asList("<li>Item 1</li>", "<li>Item 2</li>"));
+    var htmlDocument = new HtmlDocument(TEST_HTML);
+    when(htmlParser.getElementByCssQuery(anyString(), eq(ITEM_LIST_DIV_CSSQUERY)))
+        .thenReturn(dummyDiv(ITEM_LIST_DIV_CSSQUERY));
+    when(htmlParser.getElementsByCssQuery(anyString(), eq(ITEM_LIST_LI_CSSQUERY)))
+        .thenReturn(Arrays.asList(dummyLi(1), dummyLi(2)));
     when(htmlParser.getText(anyString())).thenReturn("Item text");
-    when(htmlParser.getFirstAttributeValue(anyString(), eq(EmartMallParser.IMAGE_CSSQUERY), eq(EmartMallParser.SRC_ATTRIBUTE_KEY)))
+    when(htmlParser.getFirstAttributeValue(anyString(), eq(IMAGE_CSSQUERY), eq(SRC_ATTRIBUTE_KEY)))
         .thenReturn("http://example.com/image.jpg");
     when(converter.convert(anyString(), anyString())).thenReturn(createItemInfoFixture());
-    when(htmlParser.getElementsByCssQuery(anyString(), eq(EmartMallParser.PAGES_NAVIGATOR_CSSQUERY)))
+    when(htmlParser.getElementsByCssQuery(anyString(), eq(PAGES_NAVIGATOR_CSSQUERY)))
         .thenReturn(Arrays.asList("Page 1", "Page 2"));
-    when(htmlParser.getElementByCssQuery(anyString(), eq(EmartMallParser.CURRENT_PAGE_CSSQUERY)))
+    when(htmlParser.getElementByCssQuery(anyString(), eq(CURRENT_PAGE_CSSQUERY)))
         .thenReturn("1");
 
     var result = emartMallParser.parseDocument(htmlDocument);
@@ -51,17 +54,6 @@ class EmartMallParserTest {
     assertThat(1).isEqualTo(result.currentPage());
   }
 
-  private EmartMallItemInfo createItemInfoFixture() {
-    return EmartMallItemInfo.builder()
-        .name("test")
-        .brandName("test")
-        .price("100")
-        .rating("4.8")
-        .imageUrl("testUrl")
-        .detailsUrl("testUrl")
-        .build();
-  }
-
   @Test
   void HTML_문서가_NULL일_경우_예외가_발생한다() {
     assertThatThrownBy(() -> emartMallParser.parseDocument(null))
@@ -70,7 +62,7 @@ class EmartMallParserTest {
 
   @Test
   void HTML_문서가_비어있다면_예외가_발생한다() {
-    var htmlDocument = new HtmlDocument("");
+    var htmlDocument = new HtmlDocument(EMPTY_HTML);
 
     assertThatThrownBy(() -> emartMallParser.parseDocument(htmlDocument))
         .isInstanceOf(EmptyHtmlDocumentException.class);
@@ -78,8 +70,8 @@ class EmartMallParserTest {
 
   @Test
   void 주어진_CSSQUERY에서_단일_요소를_찾을_수_없다면_예외가_발생한다() {
-    var htmlDocument = new HtmlDocument("<html>test</html>");
-    when(htmlParser.getElementByCssQuery(anyString(), eq(EmartMallParser.ITEM_LIST_DIV_CSSQUERY)))
+    var htmlDocument = new HtmlDocument(TEST_HTML);
+    when(htmlParser.getElementByCssQuery(anyString(), eq(ITEM_LIST_DIV_CSSQUERY)))
         .thenReturn("");
 
     assertThatThrownBy(() -> emartMallParser.parseDocument(htmlDocument))
@@ -88,10 +80,10 @@ class EmartMallParserTest {
 
   @Test
   void 주어진_CSSQUERY에서_요소들을_찾을_수_없다면_예외가_발생한다() {
-    var htmlDocument = new HtmlDocument("Valid HTML content");
-    when(htmlParser.getElementByCssQuery(anyString(), eq(EmartMallParser.ITEM_LIST_DIV_CSSQUERY)))
-        .thenReturn("<div class='tmpl_itemlist'>...</div>");
-    when(htmlParser.getElementsByCssQuery(anyString(), eq(EmartMallParser.ITEM_LIST_LI_CSSQUERY)))
+    var htmlDocument = new HtmlDocument(TEST_HTML);
+    when(htmlParser.getElementByCssQuery(anyString(), eq(ITEM_LIST_DIV_CSSQUERY)))
+        .thenReturn(dummyDiv(ITEM_LIST_DIV_CSSQUERY));
+    when(htmlParser.getElementsByCssQuery(anyString(), eq(ITEM_LIST_LI_CSSQUERY)))
         .thenReturn(Collections.emptyList());
 
     assertThatThrownBy(() -> emartMallParser.parseDocument(htmlDocument))
