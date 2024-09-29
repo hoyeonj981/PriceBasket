@@ -1,5 +1,6 @@
 package me.hoyeonj.pricebasket.adapter.out;
 
+import static me.hoyeonj.pricebasket.adapter.out.EmartMallItemInfoFixture.createItemInfo;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.stream.Stream;
@@ -139,24 +140,5 @@ class EmartMallItemConverterTest {
         + unitOfPrice + " "
         + "상품평점 5점 만점에 " + rating + " "
         + "상품평 개수 (1,534)";
-  }
-
-  private EmartMallItemInfo createItemInfo(
-      final String itemName,
-      final String brandName,
-      final String price,
-      final String unitOfPrice,
-      final String rating,
-      final String detailsUrl,
-      final String imageUrl) {
-    return EmartMallItemInfo.builder()
-        .name(itemName)
-        .brandName(brandName)
-        .price(price)
-        .unitOfPrice(unitOfPrice)
-        .rating(rating)
-        .detailsUrl(detailsUrl)
-        .imageUrl(imageUrl)
-        .build();
   }
 }
