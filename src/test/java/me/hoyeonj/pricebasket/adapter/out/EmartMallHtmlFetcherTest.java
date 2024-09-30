@@ -43,14 +43,14 @@ class EmartMallHtmlFetcherTest {
   @DisplayName("잘못된 HTML 형식은 예외가 발생한다")
   @Test
   void throw_exception_when_html_format_is_not_correct() {
-      var mockHtml = "{\"test\":\"test\"}";
-      var keyword = "test";
-      var searchQuery = new EmartMallSearchQuery(keyword);
-      var given = new ResponseDocument(null, 0, null, mockHtml);
-      when(httpClient.fetchFromUri(any())).thenReturn(given);
+    var mockHtml = "{\"test\":\"test\"}";
+    var keyword = "test";
+    var searchQuery = new EmartMallSearchQuery(keyword);
+    var given = new ResponseDocument(null, 0, null, mockHtml);
+    when(httpClient.fetchFromUri(any())).thenReturn(given);
 
-      assertThatThrownBy(() -> fetcher.fetchFrom(searchQuery))
-          .isInstanceOf(NotHtmlDocumentException.class);
+    assertThatThrownBy(() -> fetcher.fetchFrom(searchQuery))
+        .isInstanceOf(NotHtmlDocumentException.class);
   }
 
   @DisplayName("쿼리결과가 404 에러가 발생하면 예외가 발생한다")
