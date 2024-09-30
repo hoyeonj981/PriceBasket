@@ -6,6 +6,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -24,8 +25,9 @@ class EmartMallHtmlFetcherTest {
     MockitoAnnotations.openMocks(this);
   }
 
+  @DisplayName("쿼리결과는 HTML를 가져와야 한다")
   @Test
-  void 쿼리결과는_HTML를_가져와야_한다() {
+  void query_result_should_have_html() {
     var keyword = "test";
     var searchQuery = new EmartMallSearchQuery(keyword);
     var given = new ResponseDocument(null, 0, null, TEST_HTML);
@@ -37,8 +39,9 @@ class EmartMallHtmlFetcherTest {
     assertThat(actual.contains("<html>")).isTrue();
   }
 
+  @DisplayName("잘못된 HTML 형식은 예외가 발생한다")
   @Test
-  void 잘못된_HTML_형식은_예외가_발생한다() {
+  void throw_exception_when_html_format_is_not_correct() {
       var mockHtml = "{\"test\":\"test\"}";
       var keyword = "test";
       var searchQuery = new EmartMallSearchQuery(keyword);
@@ -49,8 +52,9 @@ class EmartMallHtmlFetcherTest {
           .isInstanceOf(NotHtmlDocumentException.class);
   }
 
+  @DisplayName("쿼리결과가 404 에러가 발생하면 예외가 발생한다")
   @Test
-  void 쿼리결과가_404_에러가_발생하면_예외가_발생한다() {
+  void thorw_exception_when_query_result_has_404_error() {
     var keyword = "test";
     var searchQuery = new EmartMallSearchQuery(keyword);
     var given = new ResponseDocument(null, 404, null, TEST_HTML);
@@ -60,8 +64,9 @@ class EmartMallHtmlFetcherTest {
         .isInstanceOf(PageNotFoundException.class);
   }
 
+  @DisplayName("쿼리결과가 500 에러가 발생하면 예외가 발생한다")
   @Test
-  void 쿼리결과가_500_에러가_발생하면_예외가_발생한다() {
+  void throw_exception_when_query_result_has_500_error() {
     var keyword = "test";
     var searchQuery = new EmartMallSearchQuery(keyword);
     var given = new ResponseDocument(null, 500, null, TEST_HTML);

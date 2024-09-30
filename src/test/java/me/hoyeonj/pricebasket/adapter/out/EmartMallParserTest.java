@@ -9,6 +9,7 @@ import static org.mockito.Mockito.*;
 import java.util.Arrays;
 import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -30,8 +31,9 @@ class EmartMallParserTest {
   }
 
 
+  @DisplayName("주어진 상품 수에 맞게 파싱한다")
   @Test
-  void 주어진_상품_수에_맞게_파싱한다() {
+  void parse_document_using_given_items() {
     var htmlDocument = new HtmlDocument(TEST_HTML);
     when(htmlParser.getElementByCssQuery(anyString(), eq(ITEM_LIST_DIV_CSSQUERY)))
         .thenReturn(dummyDiv(ITEM_LIST_DIV_CSSQUERY));
@@ -54,22 +56,25 @@ class EmartMallParserTest {
     assertThat(1).isEqualTo(result.currentPage());
   }
 
+  @DisplayName("HTML문서가 NULL일 경우 예외가 발생한다")
   @Test
-  void HTML_문서가_NULL일_경우_예외가_발생한다() {
+  void throw_exception_when_html_is_null() {
     assertThatThrownBy(() -> emartMallParser.parseDocument(null))
         .isInstanceOf(IllegalArgumentException.class);
   }
 
+  @DisplayName("HTML문서가 비어있다면 예외가 발생한다")
   @Test
-  void HTML_문서가_비어있다면_예외가_발생한다() {
+  void throw_exception_when_html_is_empty() {
     var htmlDocument = new HtmlDocument(EMPTY_HTML);
 
     assertThatThrownBy(() -> emartMallParser.parseDocument(htmlDocument))
         .isInstanceOf(EmptyHtmlDocumentException.class);
   }
 
+  @DisplayName("주어진 CSSQUERY에서 div 요소를 찾을 수 없다면 예외가 발생한다")
   @Test
-  void 주어진_CSSQUERY에서_단일_요소를_찾을_수_없다면_예외가_발생한다() {
+  void throw_exception_when_can_not_find_div_element_from_given_cssQuery() {
     var htmlDocument = new HtmlDocument(TEST_HTML);
     when(htmlParser.getElementByCssQuery(anyString(), eq(ITEM_LIST_DIV_CSSQUERY)))
         .thenReturn("");
@@ -78,8 +83,9 @@ class EmartMallParserTest {
         .isInstanceOf(ElementNotFoundException.class);
   }
 
+  @DisplayName("주어진 CSSQUERY에서 li 요소들을 찾을 수 없다면 예외가 발생한다")
   @Test
-  void 주어진_CSSQUERY에서_요소들을_찾을_수_없다면_예외가_발생한다() {
+  void throw_exception_when_can_not_find_li_element_from_givne_cssQuery() {
     var htmlDocument = new HtmlDocument(TEST_HTML);
     when(htmlParser.getElementByCssQuery(anyString(), eq(ITEM_LIST_DIV_CSSQUERY)))
         .thenReturn(dummyDiv(ITEM_LIST_DIV_CSSQUERY));

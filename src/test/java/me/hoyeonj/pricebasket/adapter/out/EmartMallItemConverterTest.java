@@ -4,6 +4,7 @@ import static me.hoyeonj.pricebasket.adapter.out.EmartMallItemInfoFixture.create
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.stream.Stream;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -13,8 +14,9 @@ class EmartMallItemConverterTest {
 
   private final EmartMallItemConverter converter = new EmartMallItemConverter();
 
+  @DisplayName("텍스트에서 상품 정보를 가져온다")
   @Test
-  void 텍스트에서_상품_정보를_가져온다() {
+  void parse_item_info_from_text() {
     var itemName = "itemName";
     var brandName = "brandName";
     var price = "1000";
@@ -32,9 +34,10 @@ class EmartMallItemConverterTest {
   }
 
 
+  @DisplayName("주어진 텍스트가 빈 문자열이거나 null일 경우 예외가 발생한다")
   @ParameterizedTest
   @MethodSource("emptyOrNull")
-  void 주어진_텍스트가_빈_문자열이거나_null일_경우_예외가_발생한다(final String given) {
+  void throw_exception_when_text_is_empty_or_null(final String given) {
     assertThatThrownBy(() -> converter.convert("", ""))
         .isInstanceOf(EmptyTextException.class);
   }
@@ -43,14 +46,16 @@ class EmartMallItemConverterTest {
     return Stream.of(null, "");
   }
 
+  @DisplayName("상품 이미지 url이 null인 경우 예외가 발생한다")
   @Test
-  void 상품_이미지_url이_null인_경우_예외가_발생한다() {
+  void throw_exception_when_image_url_is_null() {
     assertThatThrownBy(() -> converter.convert("test", null))
         .isInstanceOf(InvalidImageUrlException.class);
   }
 
+  @DisplayName("상품 상세 페이지가 없다면 예외가 발생한다")
   @Test
-  void 상품_상세_페이지가_없다면_예외가_발생한다() {
+  void throw_exception_when_there_item_detail_page_does_not_exist() {
     var itemName = "itemName";
     var brandName = "brandName";
     var price = "1000";
@@ -64,8 +69,9 @@ class EmartMallItemConverterTest {
         .isInstanceOf(ItemDetailNotFoundException.class);
   }
 
+  @DisplayName("상품이름은 빈 문자열이면 예외가 발생한다")
   @Test
-  void 상품_이름은_빈_문자열이면_예외가_발생한다() {
+  void throw_exception_when_itemName_is_empty_or_null() {
     var itemName = "";
     var brandName = "brandName";
     var price = "1000";
@@ -79,11 +85,12 @@ class EmartMallItemConverterTest {
         .isInstanceOf(ItemNameNotFoundException.class);
   }
 
+  @DisplayName("상품가격은 0 미만일 경우 예외가 발생한다")
   @ParameterizedTest
   @ValueSource(
       strings = {"0", "-1"}
   )
-  void 상품_가격은_0_미만일_경우_예외가_발생한다(final String given) {
+  void throw_exception_when_price_is_under_zero(final String given) {
     var itemName = "itemName";
     var brandName = "brandName";
     var price = given;

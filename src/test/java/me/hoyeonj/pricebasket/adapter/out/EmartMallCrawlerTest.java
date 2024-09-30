@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -30,8 +31,9 @@ class EmartMallCrawlerTest {
     crawler = new EmartMallCrawler(fetcher, parser);
   }
 
+  @DisplayName("주어진 검색어로 검색 후 파싱된 결과를 가져온다")
   @Test
-  void 주어진_검색어로_검색_후_파싱된_결과를_가져온다() {
+  void get_parsed_document_using_given_query() {
     var parameters = "givenParameters";
     var htmlDocument = new HtmlDocument(TEST_HTML);
     var expectedQuery = new EmartMallSearchQuery(parameters);
