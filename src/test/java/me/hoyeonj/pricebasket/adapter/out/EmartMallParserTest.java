@@ -1,10 +1,21 @@
 package me.hoyeonj.pricebasket.adapter.out;
 
 import static me.hoyeonj.pricebasket.adapter.out.EmartMallItemInfoFixture.createItemInfoFixture;
-import static me.hoyeonj.pricebasket.adapter.out.EmartMallParser.*;
-import static me.hoyeonj.pricebasket.adapter.out.EmartMallTestHtml.*;
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static me.hoyeonj.pricebasket.adapter.out.EmartMallParser.CURRENT_PAGE_CSSQUERY;
+import static me.hoyeonj.pricebasket.adapter.out.EmartMallParser.IMAGE_CSSQUERY;
+import static me.hoyeonj.pricebasket.adapter.out.EmartMallParser.ITEM_LIST_DIV_CSSQUERY;
+import static me.hoyeonj.pricebasket.adapter.out.EmartMallParser.ITEM_LIST_LI_CSSQUERY;
+import static me.hoyeonj.pricebasket.adapter.out.EmartMallParser.PAGES_NAVIGATOR_CSSQUERY;
+import static me.hoyeonj.pricebasket.adapter.out.EmartMallParser.SRC_ATTRIBUTE_KEY;
+import static me.hoyeonj.pricebasket.adapter.out.EmartMallTestHtml.EMPTY_HTML;
+import static me.hoyeonj.pricebasket.adapter.out.EmartMallTestHtml.TEST_HTML;
+import static me.hoyeonj.pricebasket.adapter.out.EmartMallTestHtml.dummyDiv;
+import static me.hoyeonj.pricebasket.adapter.out.EmartMallTestHtml.dummyLi;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.Collections;

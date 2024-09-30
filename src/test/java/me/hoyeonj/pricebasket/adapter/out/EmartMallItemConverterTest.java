@@ -1,7 +1,8 @@
 package me.hoyeonj.pricebasket.adapter.out;
 
 import static me.hoyeonj.pricebasket.adapter.out.EmartMallItemInfoFixture.createItemInfo;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;

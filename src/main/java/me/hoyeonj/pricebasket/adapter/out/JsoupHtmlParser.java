@@ -1,6 +1,6 @@
 package me.hoyeonj.pricebasket.adapter.out;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toUnmodifiableList;
 
 import java.util.List;
 import org.jsoup.Jsoup;

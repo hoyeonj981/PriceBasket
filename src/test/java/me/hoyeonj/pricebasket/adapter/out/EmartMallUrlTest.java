@@ -1,7 +1,8 @@
 package me.hoyeonj.pricebasket.adapter.out;
 
-import static me.hoyeonj.pricebasket.adapter.out.EmartMallUrl.*;
-import static org.assertj.core.api.Assertions.*;
+import static me.hoyeonj.pricebasket.adapter.out.EmartMallUrl.HTTPS_SEARCH_URL;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.net.MalformedURLException;
 import java.net.URL;

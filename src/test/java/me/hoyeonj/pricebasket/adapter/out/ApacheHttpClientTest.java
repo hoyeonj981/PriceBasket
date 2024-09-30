@@ -1,7 +1,9 @@
 package me.hoyeonj.pricebasket.adapter.out;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +17,7 @@ class ApacheHttpClientTest {
   void throw_exception_when_can_not_send_request() {
     apacheClient = mock(ApacheHttpClient.class);
     var givenKeyword = "keyword";
-    when(apacheClient.fetchFromUri(any())).thenThrow(new HttpRequestException("IO Error"));;
+    when(apacheClient.fetchFromUri(any())).thenThrow(new HttpRequestException("IO Error"));
 
     assertThatThrownBy(() -> apacheClient.fetchFromUri(givenKeyword))
         .isInstanceOf(HttpRequestException.class);
