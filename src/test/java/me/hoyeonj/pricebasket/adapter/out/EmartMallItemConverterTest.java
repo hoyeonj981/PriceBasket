@@ -39,7 +39,7 @@ class EmartMallItemConverterTest {
   @ParameterizedTest
   @MethodSource("emptyOrNull")
   void throw_exception_when_text_is_empty_or_null(final String given) {
-    assertThatThrownBy(() -> converter.convert("", ""))
+    assertThatThrownBy(() -> converter.convert(given, ""))
         .isInstanceOf(EmptyTextException.class);
   }
 
