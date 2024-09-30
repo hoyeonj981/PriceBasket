@@ -35,7 +35,7 @@ class EmartMallHtmlFetcherTest {
     when(httpClient.fetchFromUri(any())).thenReturn(given);
 
     var emartHtmlDocument = fetcher.fetchFrom(searchQuery);
-    var actual = emartHtmlDocument.getContent();
+    var actual = emartHtmlDocument.content();
 
     assertThat(actual.contains("<html>")).isTrue();
   }

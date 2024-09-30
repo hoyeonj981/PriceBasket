@@ -24,7 +24,7 @@ public class EmartMallParser {
 
   public EmartMallParsedDocument parseDocument(final HtmlDocument htmlDocument) {
     validateDocument(htmlDocument);
-    final var htmlText = htmlDocument.getContent();
+    final var htmlText = htmlDocument.content();
     final var itemListDiv = htmlParser.getElementByCssQuery(htmlText, ITEM_LIST_DIV_CSSQUERY);
     validateElement(itemListDiv, ITEM_LIST_DIV_CSSQUERY);
     final var itemListLi = htmlParser.getElementsByCssQuery(itemListDiv, ITEM_LIST_LI_CSSQUERY);
@@ -60,7 +60,7 @@ public class EmartMallParser {
     if (Objects.isNull(htmlDocument)) {
       throw new IllegalArgumentException("htmlDocument는 null일 수 없습니다.");
     }
-    var content = htmlDocument.getContent();
+    final var content = htmlDocument.content();
     if (Objects.isNull(content) || content.isBlank()) {
       throw new EmptyHtmlDocumentException("html 문서는 null이거나 비어있을 수 없습니다.");
     }
