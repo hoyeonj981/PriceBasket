@@ -6,6 +6,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,6 +17,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 class EmartMallHtmlFetcherTest {
+
+  private static final Map<String, List<String>> DUMMY_HEADER = Collections.emptyMap();
 
   @Mock
   private ApacheHttpClient httpClient;
@@ -30,8 +35,9 @@ class EmartMallHtmlFetcherTest {
   @Test
   void query_result_should_have_html() {
     var keyword = "test";
+    var testUrl = "https://test.com";
     var searchQuery = new EmartMallSearchQuery(keyword);
-    var given = new ResponseDocument(null, 0, null, TEST_HTML);
+    var given = ResponseDocument.create(testUrl, 0, DUMMY_HEADER, TEST_HTML);
     when(httpClient.fetchFromUri(any())).thenReturn(given);
 
     var emartHtmlDocument = fetcher.fetchFrom(searchQuery);
@@ -45,8 +51,9 @@ class EmartMallHtmlFetcherTest {
   void throw_exception_when_html_format_is_not_correct() {
     var mockHtml = "{\"test\":\"test\"}";
     var keyword = "test";
+    var testUrl = "https://test.com";
     var searchQuery = new EmartMallSearchQuery(keyword);
-    var given = new ResponseDocument(null, 0, null, mockHtml);
+    var given = ResponseDocument.create(testUrl, 0, DUMMY_HEADER, mockHtml);
     when(httpClient.fetchFromUri(any())).thenReturn(given);
 
     assertThatThrownBy(() -> fetcher.fetchFrom(searchQuery))
@@ -57,8 +64,9 @@ class EmartMallHtmlFetcherTest {
   @Test
   void thorw_exception_when_query_result_has_404_error() {
     var keyword = "test";
+    var testUrl = "https://test.com";
     var searchQuery = new EmartMallSearchQuery(keyword);
-    var given = new ResponseDocument(null, 404, null, TEST_HTML);
+    var given = ResponseDocument.create(testUrl, 404, DUMMY_HEADER, TEST_HTML);
     when(httpClient.fetchFromUri(any())).thenReturn(given);
 
     assertThatThrownBy(() -> fetcher.fetchFrom(searchQuery))
@@ -69,12 +77,12 @@ class EmartMallHtmlFetcherTest {
   @Test
   void throw_exception_when_query_result_has_500_error() {
     var keyword = "test";
+    var testUrl = "https://test.com";
     var searchQuery = new EmartMallSearchQuery(keyword);
-    var given = new ResponseDocument(null, 500, null, TEST_HTML);
+    var given = ResponseDocument.create(testUrl, 500, DUMMY_HEADER, TEST_HTML);
     when(httpClient.fetchFromUri(any())).thenReturn(given);
 
     assertThatThrownBy(() -> fetcher.fetchFrom(searchQuery))
         .isInstanceOf(InternalServerErrorException.class);
-
   }
 }
