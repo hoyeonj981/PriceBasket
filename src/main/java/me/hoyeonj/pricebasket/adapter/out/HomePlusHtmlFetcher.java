@@ -13,7 +13,7 @@ public class HomePlusHtmlFetcher {
   public HtmlDocument fetchFrom(final HomePlusSearchQuery query) {
     final var uri = SEARCH_URL.createSearchUrl(query.query());
     final var responseDocument = client.fetchFromUri(uri);
-    if (!responseDocument.content().contains("<html>")) {
+    if (!responseDocument.content().contains("<!doctype html>")) {
       throw new NotHtmlDocumentException("해당 uri에 대한 응답이 html 형식이 아닙니다. - "
           + responseDocument.url());
     }
