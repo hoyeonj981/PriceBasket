@@ -41,18 +41,17 @@ enum HomePlusUrl {
     final var builder = new StringBuilder();
     builder.append(this.protocol.getValue());
     builder.append(this.domain);
-    builder.append(this.PATH_DELIMETER);
+    builder.append(PATH_DELIMETER);
     builder.append(this.path);
-    builder.append(this.QUERY_DELIMETER);
+    builder.append(QUERY_DELIMETER);
     builder.append(this.defaultParameter);
-    builder.append(this.QUERY_DELIMETER);
-    builder.append(this.PARAMETER_SEPARATOR);
-    builder.append(this.KEYWORD_PARAMETER);
-    builder.append(this.VALUE_ASSIGNER);
+    builder.append(PARAMETER_SEPARATOR);
+    builder.append(KEYWORD_PARAMETER);
+    builder.append(VALUE_ASSIGNER);
     builder.append(queryParameterValue);
-    builder.append(this.QUERY_DELIMETER);
-    builder.append(this.MALLTYPE_PARAMETER);
-    builder.append(this.VALUE_ASSIGNER);
+    builder.append(PARAMETER_SEPARATOR);
+    builder.append(MALLTYPE_PARAMETER);
+    builder.append(VALUE_ASSIGNER);
     builder.append(this.mallType);
 
     return builder.toString();
