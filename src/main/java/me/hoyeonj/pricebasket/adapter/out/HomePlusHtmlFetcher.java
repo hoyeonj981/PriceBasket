@@ -4,16 +4,16 @@ public class HomePlusHtmlFetcher {
 
   private static final HomePlusUrl SEARCH_URL = HomePlusUrl.HTTPS_SEARCH_URL;
 
-  private final ApacheHttpClient client;
+  private final PlaywrightHttpClient client;
 
-  public HomePlusHtmlFetcher(final ApacheHttpClient client) {
+  public HomePlusHtmlFetcher(final PlaywrightHttpClient client) {
     this.client = client;
   }
 
   public HtmlDocument fetchFrom(final HomePlusSearchQuery query) {
     final var uri = SEARCH_URL.createSearchUrl(query.query());
     final var responseDocument = client.fetchFromUri(uri);
-    if (!responseDocument.content().contains("<!doctype html>")) {
+    if (!responseDocument.content().contains("<!DOCTYPE html>")) {
       throw new NotHtmlDocumentException("해당 uri에 대한 응답이 html 형식이 아닙니다. - "
           + responseDocument.url());
     }
