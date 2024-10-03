@@ -12,8 +12,7 @@ enum HomePlusUrl {
       "entry=direct"
   );
 
-  private static final String KEYWORD_PARAMETER = "inputKeyword";
-  private static final String MALLTYPE_PARAMETER = "mallType";
+  private static final String KEYWORD_PARAMETER = "keyword";
   private static final String PATH_DELIMETER = "/";
   private static final String QUERY_DELIMETER = "?";
   private static final String VALUE_ASSIGNER = "=";
@@ -34,7 +33,6 @@ enum HomePlusUrl {
     this.defaultParameter = defaultParameter;
   }
 
-  // https://mfront.homeplus.co.kr/search?entry=direct&inputKeyword=%EA%B0%90%EC%9E%90&mallType=TD
   public String createSearchUrl(final String queryParameterValue) {
     validateQueryParameter(queryParameterValue);
 
@@ -43,16 +41,18 @@ enum HomePlusUrl {
     builder.append(this.domain);
     builder.append(PATH_DELIMETER);
     builder.append(this.path);
+    builder.append(PATH_DELIMETER);
+    builder.append("tdSearchFinder");
     builder.append(QUERY_DELIMETER);
+    builder.append("displayType");
+    builder.append(VALUE_ASSIGNER);
+    builder.append("typeA");
+    builder.append(PARAMETER_SEPARATOR);
     builder.append(this.defaultParameter);
     builder.append(PARAMETER_SEPARATOR);
     builder.append(KEYWORD_PARAMETER);
     builder.append(VALUE_ASSIGNER);
     builder.append(queryParameterValue);
-    builder.append(PARAMETER_SEPARATOR);
-    builder.append(MALLTYPE_PARAMETER);
-    builder.append(VALUE_ASSIGNER);
-    builder.append(this.mallType);
 
     return builder.toString();
   }
