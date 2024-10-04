@@ -3,6 +3,7 @@ package me.hoyeonj.pricebasket.adapter.out;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,7 +26,7 @@ class HomePlusParserTest {
   @DisplayName("파일을 읽어 파싱한 상품 개수는 예상 수와 동일하다")
   @Test
   void parsed_documents_size_should_be_expected_number() throws IOException {
-    var givenHtml = new String(Files.readAllBytes(path));
+    var givenHtml = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
     var htmlDocument = new HtmlDocument(givenHtml);
 
     var actual = homePlusParser.parseDocument(htmlDocument);
