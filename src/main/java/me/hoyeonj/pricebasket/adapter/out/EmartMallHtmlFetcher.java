@@ -13,7 +13,7 @@ public class EmartMallHtmlFetcher {
   public HtmlDocument fetchFrom(final EmartMallSearchQuery query) {
     var uri = SEARCH_URL.createSearchUrl(query.query());
     var responseDocument = client.fetchFromUri(uri);
-    if (!responseDocument.content().contains("<html>")) {
+    if (!responseDocument.content().contains("<!DOCTYPE html>")) {
       throw new NotHtmlDocumentException("해당 uri에 대한 응답이 html 형식이 아닙니다. - "
           + responseDocument.url());
     }

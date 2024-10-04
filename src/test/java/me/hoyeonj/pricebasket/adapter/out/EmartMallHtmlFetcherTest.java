@@ -43,7 +43,7 @@ class EmartMallHtmlFetcherTest {
     var emartHtmlDocument = fetcher.fetchFrom(searchQuery);
     var actual = emartHtmlDocument.content();
 
-    assertThat(actual.contains("<html>")).isTrue();
+    assertThat(actual.contains("<!DOCTYPE html>")).isTrue();
   }
 
   @DisplayName("잘못된 HTML 형식은 예외가 발생한다")
