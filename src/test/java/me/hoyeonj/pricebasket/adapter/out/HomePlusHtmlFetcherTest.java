@@ -21,7 +21,7 @@ class HomePlusHtmlFetcherTest {
   private static final Map<String, List<String>> DUMMY_HEADER = Collections.emptyMap();
 
   @Mock
-  private ApacheHttpClient httpClient;
+  private PlaywrightHttpClient httpClient;
 
   @InjectMocks
   private HomePlusHtmlFetcher fetcher;
@@ -40,10 +40,10 @@ class HomePlusHtmlFetcherTest {
     var given = ResponseDocument.create(testUrl, 0, DUMMY_HEADER, TEST_HTML);
     when(httpClient.fetchFromUri(any())).thenReturn(given);
 
-    var emartHtmlDocument = fetcher.fetchFrom(searchQuery);
-    var actual = emartHtmlDocument.content();
+    var homePlusDocument = fetcher.fetchFrom(searchQuery);
+    var actual = homePlusDocument.content();
 
-    assertThat(actual.contains("<html>")).isTrue();
+    assertThat(actual.contains(TEST_HTML)).isTrue();
   }
 
   @DisplayName("잘못된 HTML 형식은 예외가 발생한다")
