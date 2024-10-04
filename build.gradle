@@ -53,6 +53,7 @@ dependencies {
 
 	// http client
 	implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.14'
+	implementation group: 'com.microsoft.playwright', name: 'playwright', version: '1.47.0'
 
 	// test
 	runtimeOnly 'com.h2database:h2'

@@ -16,15 +16,15 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-class EmartMallHtmlFetcherTest {
+class HomePlusHtmlFetcherTest {
 
   private static final Map<String, List<String>> DUMMY_HEADER = Collections.emptyMap();
 
   @Mock
-  private ApacheHttpClient httpClient;
+  private PlaywrightHttpClient httpClient;
 
   @InjectMocks
-  private EmartMallHtmlFetcher fetcher;
+  private HomePlusHtmlFetcher fetcher;
 
   @BeforeEach
   void setUp() {
@@ -36,14 +36,14 @@ class EmartMallHtmlFetcherTest {
   void query_result_should_have_html() {
     var keyword = "test";
     var testUrl = "https://test.com";
-    var searchQuery = new EmartMallSearchQuery(keyword);
+    var searchQuery = new HomePlusSearchQuery(keyword);
     var given = ResponseDocument.create(testUrl, 0, DUMMY_HEADER, TEST_HTML);
     when(httpClient.fetchFromUri(any())).thenReturn(given);
 
-    var emartHtmlDocument = fetcher.fetchFrom(searchQuery);
-    var actual = emartHtmlDocument.content();
+    var homePlusDocument = fetcher.fetchFrom(searchQuery);
+    var actual = homePlusDocument.content();
 
-    assertThat(actual.contains("<!DOCTYPE html>")).isTrue();
+    assertThat(actual.contains(TEST_HTML)).isTrue();
   }
 
   @DisplayName("잘못된 HTML 형식은 예외가 발생한다")
@@ -52,7 +52,7 @@ class EmartMallHtmlFetcherTest {
     var mockHtml = "{\"test\":\"test\"}";
     var keyword = "test";
     var testUrl = "https://test.com";
-    var searchQuery = new EmartMallSearchQuery(keyword);
+    var searchQuery = new HomePlusSearchQuery(keyword);
     var given = ResponseDocument.create(testUrl, 0, DUMMY_HEADER, mockHtml);
     when(httpClient.fetchFromUri(any())).thenReturn(given);
 
@@ -65,7 +65,7 @@ class EmartMallHtmlFetcherTest {
   void thorw_exception_when_query_result_has_404_error() {
     var keyword = "test";
     var testUrl = "https://test.com";
-    var searchQuery = new EmartMallSearchQuery(keyword);
+    var searchQuery = new HomePlusSearchQuery(keyword);
     var given = ResponseDocument.create(testUrl, 404, DUMMY_HEADER, TEST_HTML);
     when(httpClient.fetchFromUri(any())).thenReturn(given);
 
@@ -78,7 +78,7 @@ class EmartMallHtmlFetcherTest {
   void throw_exception_when_query_result_has_500_error() {
     var keyword = "test";
     var testUrl = "https://test.com";
-    var searchQuery = new EmartMallSearchQuery(keyword);
+    var searchQuery = new HomePlusSearchQuery(keyword);
     var given = ResponseDocument.create(testUrl, 500, DUMMY_HEADER, TEST_HTML);
     when(httpClient.fetchFromUri(any())).thenReturn(given);
 

@@ -2,7 +2,7 @@ package me.hoyeonj.pricebasket.adapter.out;
 
 class EmartMallTestHtml {
 
-  static final String TEST_HTML = "<html>test</html>";
+  static final String TEST_HTML = "<!DOCTYPE html>test</html>";
   static final String EMPTY_HTML = "";
 
   static String dummyDiv(final String clazz) {
