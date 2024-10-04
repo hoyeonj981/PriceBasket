@@ -8,7 +8,6 @@ enum HomePlusUrl {
       Protocol.HTTPS,
       "mfront.homeplus.co.kr",
       "search",
-      "TD",
       "entry=direct"
   );
 
@@ -21,15 +20,13 @@ enum HomePlusUrl {
   private final Protocol protocol;
   private final String domain;
   private final String path;
-  private final String mallType;
   private final String defaultParameter;
 
   HomePlusUrl(final Protocol protocol, final String domain, final String path,
-      final String mallType, final String defaultParameter) {
+      final String defaultParameter) {
     this.protocol = protocol;
     this.domain = domain;
     this.path = path;
-    this.mallType = mallType;
     this.defaultParameter = defaultParameter;
   }
 
