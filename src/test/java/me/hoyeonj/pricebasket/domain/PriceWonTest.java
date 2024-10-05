@@ -7,12 +7,12 @@ import java.math.BigDecimal;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class PriceTest {
+class PriceWonTest {
 
   @DisplayName("long value를 받아 Price 객체를 생성한다")
   @Test
   void test() {
-    var price = Price.of(1000L);
+    var price = PriceWon.of(1000L);
 
     assertThat(price.getValue()).isEqualTo(new BigDecimal(1000L));
   }
@@ -20,7 +20,7 @@ class PriceTest {
   @DisplayName("String value를 받아 Price 객체를 생성한다")
   @Test
   void test2() {
-    var price = Price.of("1000");
+    var price = PriceWon.of("1000");
 
     assertThat(price.getValue()).isEqualTo(new BigDecimal("1000"));
   }
@@ -30,7 +30,7 @@ class PriceTest {
   void throw_exception_when_price_is_negative_value() {
     var given = -1;
 
-    assertThatThrownBy(() -> Price.of(given))
+    assertThatThrownBy(() -> PriceWon.of(given))
         .isInstanceOf(NegativePriceException.class);
   }
 
@@ -39,9 +39,9 @@ class PriceTest {
   void result_of_adding_two_prices_is_equal_to_values_added() {
     var givenValue1 = 1000L;
     var givenValue2 = 2000L;
-    var price1 = Price.of(givenValue1);
-    var price2 = Price.of(givenValue2);
-    var expected = Price.of(givenValue1 + givenValue2);
+    var price1 = PriceWon.of(givenValue1);
+    var price2 = PriceWon.of(givenValue2);
+    var expected = PriceWon.of(givenValue1 + givenValue2);
 
     var actual = price1.add(price2);
 
@@ -53,9 +53,9 @@ class PriceTest {
   void result_of_subtracted_two_prices_is_equal_to_values_subtracted() {
     var givenValue1 = 3000L;
     var givenValue2 = 2000L;
-    var price1 = Price.of(givenValue1);
-    var price2 = Price.of(givenValue2);
-    var expected = Price.of(givenValue1 - givenValue2);
+    var price1 = PriceWon.of(givenValue1);
+    var price2 = PriceWon.of(givenValue2);
+    var expected = PriceWon.of(givenValue1 - givenValue2);
 
     var actual = price1.subtract(price2);
 

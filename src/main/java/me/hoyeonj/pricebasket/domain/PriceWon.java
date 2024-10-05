@@ -3,19 +3,19 @@ package me.hoyeonj.pricebasket.domain;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class Price {
+public class PriceWon {
 
   private final BigDecimal value;
 
-  public static Price of(final long value) {
-    return new Price(BigDecimal.valueOf(value));
+  public static PriceWon of(final long value) {
+    return new PriceWon(BigDecimal.valueOf(value));
   }
 
-  public static Price of(final String value) {
-    return new Price(new BigDecimal(value));
+  public static PriceWon of(final String value) {
+    return new PriceWon(new BigDecimal(value));
   }
 
-  private Price(final BigDecimal value) {
+  private PriceWon(final BigDecimal value) {
     checkNegative(value);
     this.value = value;
   }
@@ -26,12 +26,12 @@ public class Price {
     }
   }
 
-  public Price add(final Price price) {
-    return new Price(this.value.add(price.value));
+  public PriceWon add(final PriceWon priceWon) {
+    return new PriceWon(this.value.add(priceWon.value));
   }
 
-  public Price subtract(final Price price) {
-    return new Price(this.value.subtract(price.value));
+  public PriceWon subtract(final PriceWon priceWon) {
+    return new PriceWon(this.value.subtract(priceWon.value));
   }
 
   public BigDecimal getValue() {
@@ -46,8 +46,8 @@ public class Price {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    final Price price = (Price) o;
-    return Objects.equals(value, price.value);
+    final PriceWon priceWon = (PriceWon) o;
+    return Objects.equals(value, priceWon.value);
   }
 
   @Override
