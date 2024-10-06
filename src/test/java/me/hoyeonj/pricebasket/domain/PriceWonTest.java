@@ -4,12 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.math.BigDecimal;
-import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class PriceWonTest {
 
@@ -68,7 +66,13 @@ class PriceWonTest {
 
   @DisplayName("원화는 소수점 첫째자리부터 무조건 올림으로 처리한다")
   @ParameterizedTest
-  @MethodSource("decimalPointAndExpected")
+  @CsvSource({
+      "1000.0, 1000",
+      "123.123, 124",
+      "123.456999999, 124",
+      "123.999999, 124",
+      "123.11111111, 124"
+  })
   void price_won_is_always_round_up_first_decimal(String decimalPoint, String roundUp) {
     var expected = PriceWon.of(roundUp);
 
@@ -77,13 +81,4 @@ class PriceWonTest {
     assertThat(actual).isEqualTo(expected);
   }
 
-  private static Stream<Arguments> decimalPointAndExpected() {
-    return Stream.of(
-        Arguments.of("1000.0", "1000"),
-        Arguments.of("123.123", "124"),
-        Arguments.of("123.456999999", "124"),
-        Arguments.of("123.999999", "124"),
-        Arguments.of("123.11111111", "124")
-    );
-  }
 }

@@ -1,6 +1,6 @@
 package me.hoyeonj.pricebasket.domain;
 
-import static me.hoyeonj.pricebasket.domain.MeasurementType.*;
+import static me.hoyeonj.pricebasket.domain.MeasurementType.from;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class MeasurementTypeTest {
@@ -30,7 +30,14 @@ class MeasurementTypeTest {
 
   @DisplayName("단위당 가격은 100을 기준으로 계산된다")
   @ParameterizedTest
-  @MethodSource("amountAndPriceAndUnit")
+  @CsvSource({
+      "1.8, l, 2680, 149",
+      "3.6, L, 5360, 149",
+      "1, KG, 3780, 378",
+      "1, Kg, 1980, 198",
+      "315, G, 5980, 1899",
+      "1000, g, 4880, 488"
+  })
   void unit_of_price_is_calculated_on_the_basis_100(
       String amount, String symbol, String totalPrice, String unitPrice) {
     var givenAmount = new BigDecimal(amount);
@@ -41,16 +48,5 @@ class MeasurementTypeTest {
         .calculateStandardUnitPrice(givenTotalPrice, givenAmount);
 
     assertThat(actual).isEqualTo(expected);
-  }
-
-  private static Stream<Arguments> amountAndPriceAndUnit() {
-    return Stream.of(
-        Arguments.of("1.8", "l", "2680", "149"),
-        Arguments.of("3.6", "L", "5360", "149"),
-        Arguments.of("1", "KG", "3780", "378"),
-        Arguments.of("1", "Kg", "1980", "198"),
-        Arguments.of("315", "G", "5980", "1899"),
-        Arguments.of("1000", "g", "4880", "488")
-    );
   }
 }
