@@ -1,9 +1,12 @@
 package me.hoyeonj.pricebasket.domain;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 public class PriceWon {
+
+  private static final int ROUND_UP_FRIST_DECIMAL = 0;
 
   private final BigDecimal value;
 
@@ -15,9 +18,13 @@ public class PriceWon {
     return new PriceWon(new BigDecimal(value));
   }
 
+  public static PriceWon of(final BigDecimal value) {
+    return new PriceWon(value);
+  }
+
   private PriceWon(final BigDecimal value) {
     checkNegative(value);
-    this.value = value;
+    this.value = value.setScale(ROUND_UP_FRIST_DECIMAL, RoundingMode.UP);
   }
 
   private void checkNegative(final BigDecimal price) {
