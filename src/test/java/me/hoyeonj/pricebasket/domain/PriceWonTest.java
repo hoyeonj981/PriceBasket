@@ -81,4 +81,19 @@ class PriceWonTest {
     assertThat(actual).isEqualTo(expected);
   }
 
+  @DisplayName("PriceWon 객체끼리 비교한다. 작을 경우 -1, 같다면 0, 클 경우 1")
+  @ParameterizedTest
+  @CsvSource({
+      "10, 3, 1",
+      "3, 10, -1",
+      "10, 10, 0",
+  })
+  void price_is_comparable_each_one(long left, long right, int expected) {
+    var leftOperand = PriceWon.of(left);
+    var rightOperand = PriceWon.of(right);
+
+    var actual = leftOperand.compareTo(rightOperand);
+
+    assertThat(actual).isEqualTo(expected);
+  }
 }

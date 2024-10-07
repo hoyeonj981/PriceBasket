@@ -4,9 +4,11 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
 
-public class PriceWon {
+public class PriceWon implements Comparable<PriceWon> {
 
   private static final int ROUND_UP_FRIST_DECIMAL = 0;
+
+  public static final PriceWon ZERO = new PriceWon(BigDecimal.ZERO);
 
   private final BigDecimal value;
 
@@ -60,5 +62,17 @@ public class PriceWon {
   @Override
   public int hashCode() {
     return Objects.hash(value);
+  }
+
+  @Override
+  public int compareTo(final PriceWon o) {
+    return this.value.compareTo(o.value);
+  }
+
+  @Override
+  public String toString() {
+    return "PriceWon{" +
+        "value=" + value +
+        '}';
   }
 }
