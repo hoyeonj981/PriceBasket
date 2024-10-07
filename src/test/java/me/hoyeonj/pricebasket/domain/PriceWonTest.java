@@ -96,4 +96,22 @@ class PriceWonTest {
 
     assertThat(actual).isEqualTo(expected);
   }
+
+  @DisplayName("현재 가격에 주어진 백분율을 적용한다")
+  @ParameterizedTest
+  @CsvSource({
+      "1000, 10, 100",
+      "3000, 25, 750",
+      "4990, 20, 998",
+      "7980, 25, 1995",
+      "8480, 23, 1951"
+  })
+  void apply_given_percentage_to_price(String price, int percentage, String applied) {
+    var givenPrice = PriceWon.of(price);
+    var expected = PriceWon.of(applied);
+
+    var actual = givenPrice.applyPercentage(percentage);
+
+    assertThat(actual).isEqualTo(expected);
+  }
 }

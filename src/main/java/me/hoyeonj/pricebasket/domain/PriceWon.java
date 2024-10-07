@@ -7,6 +7,8 @@ import java.util.Objects;
 public class PriceWon implements Comparable<PriceWon> {
 
   private static final int ROUND_UP_FRIST_DECIMAL = 0;
+  private static final int PRECISION = 10;
+  private static final BigDecimal ONE_HUNDRED = new BigDecimal(100L);
 
   public static final PriceWon ZERO = new PriceWon(BigDecimal.ZERO);
 
@@ -41,6 +43,20 @@ public class PriceWon implements Comparable<PriceWon> {
 
   public PriceWon subtract(final PriceWon priceWon) {
     return new PriceWon(this.value.subtract(priceWon.value));
+  }
+
+  public PriceWon applyPercentage(final int percentage) {
+    return applyPercentage(new BigDecimal(percentage));
+  }
+
+  public PriceWon applyPercentage(final BigDecimal percentage) {
+    if (percentage.compareTo(BigDecimal.ZERO) < 0) {
+      throw new NegativePercentageException("백분율은 음수일 수 없습니다. - " + percentage);
+    }
+    final var factor = percentage.divide(ONE_HUNDRED, PRECISION, RoundingMode.HALF_UP);
+    final var result = this.value.multiply(factor)
+        .setScale(ROUND_UP_FRIST_DECIMAL, RoundingMode.UP);
+    return new PriceWon(result);
   }
 
   public BigDecimal getValue() {
