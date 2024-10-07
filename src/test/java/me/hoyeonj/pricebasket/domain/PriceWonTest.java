@@ -114,4 +114,14 @@ class PriceWonTest {
 
     assertThat(actual).isEqualTo(expected);
   }
+
+  @DisplayName("백분율이 음수일 경우 예외가 발생한다")
+  @Test
+  void throw_exception_when_percentage_is_negative() {
+    var price = PriceWon.of(100L);
+    var givenPercentage = -1;
+
+    assertThatThrownBy(() -> price.applyPercentage(givenPercentage))
+        .isInstanceOf(NegativePercentageException.class);
+  }
 }
