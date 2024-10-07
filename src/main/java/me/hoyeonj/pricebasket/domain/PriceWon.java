@@ -59,6 +59,10 @@ public class PriceWon implements Comparable<PriceWon> {
     return new PriceWon(result);
   }
 
+  public PriceWon multiplyQuantity(final int quantity) {
+    return new PriceWon(this.value.multiply(BigDecimal.valueOf(quantity)));
+  }
+
   public BigDecimal getValue() {
     return new BigDecimal(this.value.longValue());
   }

@@ -124,4 +124,16 @@ class PriceWonTest {
     assertThatThrownBy(() -> price.applyPercentage(givenPercentage))
         .isInstanceOf(NegativePercentageException.class);
   }
+
+  @DisplayName("주어진 양만큼 곱한 price 객체를 만든다")
+  @Test
+  void create_price_object_with_given_quantity() {
+    var givenQuantity = 15;
+    var givenPrice = 4990L;
+    var expected = PriceWon.of(givenPrice * givenQuantity);
+
+    var actual = PriceWon.of(givenPrice).multiplyQuantity(givenQuantity);
+
+    assertThat(actual).isEqualTo(expected);
+  }
 }
