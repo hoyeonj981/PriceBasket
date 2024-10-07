@@ -13,7 +13,7 @@ class PriceWonTest {
 
   @DisplayName("long value를 받아 Price 객체를 생성한다")
   @Test
-  void test() {
+  void create_price_object_with_given_long_value() {
     var price = PriceWon.of(1000L);
 
     assertThat(price.getValue()).isEqualTo(new BigDecimal(1000L));
@@ -21,7 +21,7 @@ class PriceWonTest {
 
   @DisplayName("String value를 받아 Price 객체를 생성한다")
   @Test
-  void test2() {
+  void create_price_object_with_given_string_value() {
     var price = PriceWon.of("1000");
 
     assertThat(price.getValue()).isEqualTo(new BigDecimal("1000"));
