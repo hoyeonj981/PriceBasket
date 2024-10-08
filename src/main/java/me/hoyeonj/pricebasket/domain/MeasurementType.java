@@ -1,25 +1,16 @@
 package me.hoyeonj.pricebasket.domain;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Function;
 
 public enum MeasurementType {
 
-  G("g", BigDecimal::new),
-  KG("kg", MeasurementType::getDecimal),
-  ML("ml", BigDecimal::new),
-  L("l", MeasurementType::getDecimal),
+  G("g"),
+  KG("kg"),
+  ML("ml"),
+  L("l"),
   ;
-
-  private static BigDecimal getDecimal(final String amount) {
-    return new BigDecimal(amount)
-        .multiply(BigDecimal.valueOf(1000L))
-        .setScale(0, RoundingMode.HALF_UP);
-  }
 
   private static final Map<String, MeasurementType> symbolMap = new HashMap<>();
 
@@ -30,7 +21,6 @@ public enum MeasurementType {
   }
 
   private final String symbol;
-  private final Function<String, BigDecimal> metricUnitConverter;
 
   public static MeasurementType from(final String symbol) {
     if (Objects.isNull(symbol)) {
@@ -44,14 +34,8 @@ public enum MeasurementType {
     return measurementType;
   }
 
-  MeasurementType(final String symbol, final Function<String, BigDecimal> metricUnitConverter) {
+  MeasurementType(final String symbol) {
     this.symbol = symbol;
-    this.metricUnitConverter = metricUnitConverter;
-  }
-
-  public BigDecimal convertToBasicUnit(final String amount) {
-    return symbolMap.get(this.symbol)
-        .metricUnitConverter.apply(amount);
   }
 
   public String getSymbol() {
