@@ -39,7 +39,7 @@ public class UnitPrice implements Comparable<UnitPrice> {
   }
 
   public PriceWon getPriceWon() {
-    return PriceWon.of(priceWon.getValue());
+    return new PriceWon(priceWon);
   }
 
   public MeasurementType getUnit() {

@@ -26,6 +26,10 @@ public class PriceWon implements Comparable<PriceWon> {
     return new PriceWon(value);
   }
 
+  public PriceWon(final PriceWon priceWon) {
+    this.value = priceWon.value;
+  }
+
   private PriceWon(final BigDecimal value) {
     checkNegative(value);
     this.value = value.setScale(ROUND_UP_FRIST_DECIMAL, RoundingMode.UP);
