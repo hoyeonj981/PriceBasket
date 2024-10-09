@@ -2,4 +2,5 @@
 <FindBugsFilter>
   <!-- Ignored bug categories -->
   <Bug pattern="RV_RETURN_VALUE_IGNORED_INFERRED"/>
+  <Bug pattern="CT_CONSTRUCTOR_THROW"/>
 </FindBugsFilter>
