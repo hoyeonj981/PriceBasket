@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
 
-public class PriceWon implements Comparable<PriceWon> {
+public final class PriceWon implements Comparable<PriceWon> {
 
   private static final int ROUND_UP_FRIST_DECIMAL = 0;
   private static final int PRECISION = 10;

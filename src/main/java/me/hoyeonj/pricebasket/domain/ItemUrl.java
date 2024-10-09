@@ -3,7 +3,7 @@ package me.hoyeonj.pricebasket.domain;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-public class ItemUrl {
+public final class ItemUrl {
 
   private static final String HTTPS_URL_REGEX =
       "^(https?://)?([\\w-]+\\.)+[\\w-]+(:\\d{1,5})?(/[\\w-./?%&=]*)?$";
