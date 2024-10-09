@@ -20,8 +20,8 @@ public class ItemFactory {
     final var totalPrice = PriceWon.of(input.totalPrice());
     final var unitPrice = UnitPrice.create(input.totalAmount(), totalPrice, input.unitSymbol(),
         calculator);
-    final var detailsUrl = new ItemUrl(input.detailsUrl());
-    final var imageUrl = new ItemUrl(input.imageUrl());
+    final var detailsUrl = ItemUrl.of(input.detailsUrl());
+    final var imageUrl = ItemUrl.of(input.imageUrl());
 
     final var itemInfo = new ItemInfo(input.name(), totalPrice, unitPrice, input.rating(),
         detailsUrl, imageUrl);

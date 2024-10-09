@@ -19,7 +19,7 @@ class ItemUrlTest {
       "/image/test.jpg"
   })
   void throwExceptionWhenInvalidUrlPattern(String given) {
-    assertThatThrownBy(() -> new ItemUrl(given))
+    assertThatThrownBy(() -> ItemUrl.of(given))
         .isInstanceOf(InvalidUrlException.class);
   }
 
@@ -32,7 +32,7 @@ class ItemUrlTest {
       "https://test.com/search?key1=value1&key2=value2"
   })
   void createItemUrlWhenUrlIsValid(String given) {
-    var itemUrl = new ItemUrl(given);
+    var itemUrl = ItemUrl.of(given);
 
     assertThat(itemUrl.getValue()).isEqualTo(given);
   }

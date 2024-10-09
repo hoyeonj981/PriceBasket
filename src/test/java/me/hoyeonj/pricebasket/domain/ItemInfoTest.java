@@ -19,8 +19,8 @@ class ItemInfoTest {
     var name = "Test Item";
     var totalPrice = PriceWon.of("10000");
     var rating = "4.5";
-    var itemDetails = new ItemUrl("http://example.com/details");
-    var itemImage = new ItemUrl("http://example.com/image.jpg");
+    var itemDetails = ItemUrl.of("http://example.com/details");
+    var itemImage = ItemUrl.of("http://example.com/image.jpg");
 
     unitPrice = mock(UnitPrice.class);
     when(unitPrice.getPriceWon()).thenReturn(PriceWon.of("1000"));

@@ -11,7 +11,11 @@ public class ItemUrl {
 
   private final String value;
 
-  public ItemUrl(final String value) {
+  public static ItemUrl of(final String value) {
+    return new ItemUrl(value);
+  }
+
+  private ItemUrl(final String value) {
     validateUrl(value);
     this.value = value;
   }
