@@ -11,23 +11,18 @@ import org.junit.jupiter.api.Test;
 
 class ItemInfoTest {
 
-  private String name;
-  private PriceWon totalPrice;
   private UnitPrice unitPrice;
-  private String rating;
-  private ItemUrl itemDetails;
-  private ItemUrl itemImage;
   private ItemInfo itemInfo;
 
   @BeforeEach
   void setUp() {
-    name = "Test Item";
-    totalPrice = PriceWon.of("10000");
-    unitPrice = mock(UnitPrice.class);
-    rating = "4.5";
-    itemDetails = new ItemUrl("http://example.com/details");
-    itemImage = new ItemUrl("http://example.com/image.jpg");
+    String name = "Test Item";
+    PriceWon totalPrice = PriceWon.of("10000");
+    String rating = "4.5";
+    ItemUrl itemDetails = new ItemUrl("http://example.com/details");
+    ItemUrl itemImage = new ItemUrl("http://example.com/image.jpg");
 
+    unitPrice = mock(UnitPrice.class);
     when(unitPrice.getPriceWon()).thenReturn(PriceWon.of("1000"));
     when(unitPrice.getUnit()).thenReturn(MeasurementType.G);
     when(unitPrice.getTotalAmount()).thenReturn(new BigDecimal("100"));
