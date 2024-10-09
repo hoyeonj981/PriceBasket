@@ -17,7 +17,7 @@ class EmartMallItemConverterTest {
 
   @DisplayName("텍스트에서 상품 정보를 가져온다")
   @Test
-  void parse_item_info_from_text() {
+  void parseItemInfoFromText() {
     var itemName = "itemName";
     var brandName = "brandName";
     var price = "1000";
@@ -38,7 +38,7 @@ class EmartMallItemConverterTest {
   @DisplayName("주어진 텍스트가 빈 문자열이거나 null일 경우 예외가 발생한다")
   @ParameterizedTest
   @MethodSource("emptyOrNull")
-  void throw_exception_when_text_is_empty_or_null(final String given) {
+  void throwExceptionWhenTextIsEmptyOrNull(final String given) {
     assertThatThrownBy(() -> converter.convert(given, ""))
         .isInstanceOf(EmptyTextException.class);
   }
@@ -49,14 +49,14 @@ class EmartMallItemConverterTest {
 
   @DisplayName("상품 이미지 url이 null인 경우 예외가 발생한다")
   @Test
-  void throw_exception_when_image_url_is_null() {
+  void throwExceptionWhenImageUrlIsNull() {
     assertThatThrownBy(() -> converter.convert("test", null))
         .isInstanceOf(InvalidImageUrlException.class);
   }
 
   @DisplayName("상품 상세 페이지가 없다면 예외가 발생한다")
   @Test
-  void throw_exception_when_there_item_detail_page_does_not_exist() {
+  void throwExceptionWhenThereItemDetailPageDoesNotExist() {
     var itemName = "itemName";
     var brandName = "brandName";
     var price = "1000";
@@ -72,7 +72,7 @@ class EmartMallItemConverterTest {
 
   @DisplayName("상품이름은 빈 문자열이면 예외가 발생한다")
   @Test
-  void throw_exception_when_itemName_is_empty_or_null() {
+  void throwExceptionWhenItemNameIsEmptyOrNull() {
     var itemName = "";
     var brandName = "brandName";
     var price = "1000";
@@ -91,7 +91,7 @@ class EmartMallItemConverterTest {
   @ValueSource(
       strings = {"0", "-1"}
   )
-  void throw_exception_when_price_is_under_zero(final String given) {
+  void throwExceptionWhenPriceIsUnderZero(final String given) {
     var itemName = "itemName";
     var brandName = "brandName";
     var price = given;

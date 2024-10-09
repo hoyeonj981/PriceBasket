@@ -13,7 +13,7 @@ class PriceWonTest {
 
   @DisplayName("long value를 받아 Price 객체를 생성한다")
   @Test
-  void create_price_object_with_given_long_value() {
+  void createPriceObjectWithGivenLongValue() {
     var price = PriceWon.of(1000L);
 
     assertThat(price.getValue()).isEqualTo(new BigDecimal(1000L));
@@ -21,7 +21,7 @@ class PriceWonTest {
 
   @DisplayName("String value를 받아 Price 객체를 생성한다")
   @Test
-  void create_price_object_with_given_string_value() {
+  void createPriceObjectWithGivenStringValue() {
     var price = PriceWon.of("1000");
 
     assertThat(price.getValue()).isEqualTo(new BigDecimal("1000"));
@@ -29,7 +29,7 @@ class PriceWonTest {
 
   @DisplayName("음수를 가격으로 만들 경우 예외가 발생한다")
   @Test
-  void throw_exception_when_price_is_negative_value() {
+  void throwExceptionWhenPriceIsNegativeValue() {
     var given = -1;
 
     assertThatThrownBy(() -> PriceWon.of(given))
@@ -38,7 +38,7 @@ class PriceWonTest {
 
   @DisplayName("두 Price를 더한 결과는 value들을 더한 값과 같다")
   @Test
-  void result_of_adding_two_prices_is_equal_to_values_added() {
+  void resultOfAddingTwoPricesIsEqualToValuesAdded() {
     var givenValue1 = 1000L;
     var givenValue2 = 2000L;
     var price1 = PriceWon.of(givenValue1);
@@ -52,7 +52,7 @@ class PriceWonTest {
 
   @DisplayName("두 Price를 뺸 결과는 value들을 뺀 값과 같다")
   @Test
-  void result_of_subtracted_two_prices_is_equal_to_values_subtracted() {
+  void resultOfSubtractedTwoPricesIsEqualToValuesSubtracted() {
     var givenValue1 = 3000L;
     var givenValue2 = 2000L;
     var price1 = PriceWon.of(givenValue1);
@@ -73,7 +73,7 @@ class PriceWonTest {
       "123.999999, 124",
       "123.11111111, 124"
   })
-  void price_won_is_always_round_up_first_decimal(String decimalPoint, String roundUp) {
+  void priceWonIsAlwaysRoundUpFirstDecimal(String decimalPoint, String roundUp) {
     var expected = PriceWon.of(roundUp);
 
     var actual = PriceWon.of(decimalPoint);
@@ -88,7 +88,7 @@ class PriceWonTest {
       "3, 10, -1",
       "10, 10, 0",
   })
-  void price_is_comparable_each_one(long left, long right, int expected) {
+  void priceIsComparableEachOne(long left, long right, int expected) {
     var leftOperand = PriceWon.of(left);
     var rightOperand = PriceWon.of(right);
 
@@ -106,7 +106,7 @@ class PriceWonTest {
       "7980, 25, 1995",
       "8480, 23, 1951"
   })
-  void apply_given_percentage_to_price(String price, int percentage, String applied) {
+  void applyGivenPercentageToPrice(String price, int percentage, String applied) {
     var givenPrice = PriceWon.of(price);
     var expected = PriceWon.of(applied);
 
@@ -117,7 +117,7 @@ class PriceWonTest {
 
   @DisplayName("백분율이 음수일 경우 예외가 발생한다")
   @Test
-  void throw_exception_when_percentage_is_negative() {
+  void throwExceptionWhenPercentageIsNegative() {
     var price = PriceWon.of(100L);
     var givenPercentage = -1;
 
@@ -127,7 +127,7 @@ class PriceWonTest {
 
   @DisplayName("주어진 양만큼 곱한 price 객체를 만든다")
   @Test
-  void create_price_object_with_given_quantity() {
+  void createPriceObjectWithGivenQuantity() {
     var givenQuantity = 15;
     var givenPrice = 4990L;
     var expected = PriceWon.of(givenPrice * givenQuantity);

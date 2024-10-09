@@ -16,7 +16,7 @@ class ItemIdTest {
 
   @DisplayName("주어진 문자열을 기반으로 객체를 생성한다")
   @Test
-  void create_object_using_given_string() {
+  void createObjectUsingGivenString() {
     var givenId = "11111";
 
     var itemId = ItemId.from(givenId);
@@ -26,7 +26,7 @@ class ItemIdTest {
 
   @DisplayName("무작위 id는 UUID 형식으로 생성된다.")
   @Test
-  void withoutId_should_create_valid_UUID() {
+  void withoutIdShouldCreateValidUuid() {
     var itemId = ItemId.create();
     var id = itemId.getValue();
 

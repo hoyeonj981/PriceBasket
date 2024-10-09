@@ -16,11 +16,11 @@ class ItemInfoTest {
 
   @BeforeEach
   void setUp() {
-    String name = "Test Item";
-    PriceWon totalPrice = PriceWon.of("10000");
-    String rating = "4.5";
-    ItemUrl itemDetails = new ItemUrl("http://example.com/details");
-    ItemUrl itemImage = new ItemUrl("http://example.com/image.jpg");
+    var name = "Test Item";
+    var totalPrice = PriceWon.of("10000");
+    var rating = "4.5";
+    var itemDetails = new ItemUrl("http://example.com/details");
+    var itemImage = new ItemUrl("http://example.com/image.jpg");
 
     unitPrice = mock(UnitPrice.class);
     when(unitPrice.getPriceWon()).thenReturn(PriceWon.of("1000"));
@@ -32,7 +32,7 @@ class ItemInfoTest {
 
   @DisplayName("가격을 업데이트할 경우, 가격과 단위을 빼고 모두 동일하다")
   @Test
-  void updatedPrice_should_return_new_object_with_updated_price() {
+  void updatedPriceShouldReturnNewObjectWithUpdatedPrice() {
     var newTotalPrice = PriceWon.of("20000");
     var newUnitPrice = mock(UnitPrice.class);
     when(unitPrice.updateUnitPrice(newTotalPrice)).thenReturn(newUnitPrice);

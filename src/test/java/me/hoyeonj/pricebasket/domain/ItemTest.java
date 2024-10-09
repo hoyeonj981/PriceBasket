@@ -14,7 +14,7 @@ class ItemTest {
   @DisplayName("id값 없이 상품객체를 생성한다")
   @ParameterizedTest
   @EnumSource(MallType.class)
-  void create_item_object_withoud_id(MallType givenMall) {
+  void createItemObjectWithoutId(MallType givenMall) {
     var mockItemInfo = mock(ItemInfo.class);
 
     var actual = Item.withoutId(mockItemInfo, givenMall);
@@ -28,7 +28,7 @@ class ItemTest {
   @DisplayName("주어진 id값을 가지고 상품객체를 생성한다")
   @ParameterizedTest
   @EnumSource(MallType.class)
-  void create_item_object_with_id(MallType givenMall) {
+  void createItemObjectWithId(MallType givenMall) {
     var mockItemInfo = mock(ItemInfo.class);
     var id = "testId";
 
@@ -42,7 +42,7 @@ class ItemTest {
 
   @DisplayName("총가격이 업데이트할 경우 새로운 객체를 생성한다")
   @Test
-  void update_total_price_method_creates_new_object() {
+  void updateTotalPriceMethodCreatesNewObject() {
     var originalItemInfo = mock(ItemInfo.class);
     var updatedItemInfo = mock(ItemInfo.class);
     var newPrice = mock(PriceWon.class);
@@ -60,7 +60,7 @@ class ItemTest {
 
   @DisplayName("상품은 id, itemInfo, MallType이 다르다면 다른 객체이다")
   @Test
-  void same_object_when_id_iteminfo_malltype_are_same() {
+  void sameObjectWhenPropertiesAreSame() {
     var itemInfo1 = mock(ItemInfo.class);
     var itemInfo2 = mock(ItemInfo.class);
 

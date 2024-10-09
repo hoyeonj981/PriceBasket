@@ -14,7 +14,7 @@ class PlaywrightHttpClientTest {
 
   @DisplayName("HTTP 요청을 보낼 수 없다면 예외가 발생한다")
   @Test
-  void throw_exception_when_can_not_send_request() {
+  void throwExceptionWhenCanNotSendRequest() {
     playwrightHttpClient = mock(PlaywrightHttpClient.class);
     var givenKeyword = "keyword";
     when(playwrightHttpClient.fetchFromUri(any())).thenThrow(new HttpRequestException("IO Error"));

@@ -25,7 +25,7 @@ class UnitPriceTest {
 
   @DisplayName("정상적으로 UnitPrice 객체를 생성한다")
   @Test
-  void create_unit_price_object() {
+  void createUnitPriceObject() {
     when(mockCalculator.calculate(any(), any(), any()))
         .thenReturn(PriceWon.of(1000));
 
@@ -38,7 +38,7 @@ class UnitPriceTest {
 
   @DisplayName("총 가격이 변경되면 새롭게 단위가격을 생성한다")
   @Test
-  void updating_will_create_new_unit_price_object() {
+  void updatingWillCreateNewUnitPriceObject() {
     var givenPrice = 2000L;
     when(mockCalculator.calculate(any(), any(), any()))
         .thenReturn(PriceWon.of(1000))
@@ -55,11 +55,11 @@ class UnitPriceTest {
   @DisplayName("단위 가격은 가격으로 비교한다")
   @ParameterizedTest
   @CsvSource({
-     "100, 200, -1",
+      "100, 200, -1",
       "100, 100, 0",
       "200, 100, 1",
   })
-  void compare_unit_price_correctly(String left, String right, int expected) {
+  void compareUnitPriceCorrectly(String left, String right, int expected) {
     when(mockCalculator.calculate(any(), any(), any()))
         .thenReturn(PriceWon.of(left))
         .thenReturn(PriceWon.of(right));

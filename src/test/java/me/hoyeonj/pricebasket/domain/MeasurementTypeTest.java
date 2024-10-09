@@ -16,14 +16,14 @@ class MeasurementTypeTest {
       "", " ",
       "oz", "lb", "t", "gz"
   })
-  void throw_exception_when_symbol_is_not_exist(String given) {
+  void throwExceptionWhenSymbolIsNotExist(String given) {
     assertThatThrownBy(() -> from(given))
         .isInstanceOf(NotSupportedUnitException.class);
   }
 
   @DisplayName("단위 Symbol이 null이라면 예외가 발생한다")
   @Test
-  void throw_exception_when_symbol_is_null() {
+  void throwExceptionWhenSymbolIsNull() {
     String given = null;
     assertThatThrownBy(() -> from(given))
         .isInstanceOf(IllegalArgumentException.class);

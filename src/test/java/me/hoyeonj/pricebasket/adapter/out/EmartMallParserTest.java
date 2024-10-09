@@ -44,7 +44,7 @@ class EmartMallParserTest {
 
   @DisplayName("주어진 상품 수에 맞게 파싱한다")
   @Test
-  void parse_document_using_given_items() {
+  void parseDocumentUsingGivenItems() {
     var htmlDocument = new HtmlDocument(TEST_HTML);
     when(htmlParser.getElementByCssQuery(anyString(), eq(ITEM_LIST_DIV_CSSQUERY)))
         .thenReturn(dummyDiv(ITEM_LIST_DIV_CSSQUERY));
@@ -69,14 +69,14 @@ class EmartMallParserTest {
 
   @DisplayName("HTML문서가 NULL일 경우 예외가 발생한다")
   @Test
-  void throw_exception_when_html_is_null() {
+  void throwExceptionWhenHtmlIsNull() {
     assertThatThrownBy(() -> emartMallParser.parseDocument(null))
         .isInstanceOf(IllegalArgumentException.class);
   }
 
   @DisplayName("HTML문서가 비어있다면 예외가 발생한다")
   @Test
-  void throw_exception_when_html_is_empty() {
+  void throwExceptionWhenHtmlIsEmpty() {
     var htmlDocument = new HtmlDocument(EMPTY_HTML);
 
     assertThatThrownBy(() -> emartMallParser.parseDocument(htmlDocument))
@@ -85,7 +85,7 @@ class EmartMallParserTest {
 
   @DisplayName("주어진 CSSQUERY에서 div 요소를 찾을 수 없다면 예외가 발생한다")
   @Test
-  void throw_exception_when_can_not_find_div_element_from_given_cssQuery() {
+  void throwExceptionWhenCanNotFindDivElementFromGivenCssQuery() {
     var htmlDocument = new HtmlDocument(TEST_HTML);
     when(htmlParser.getElementByCssQuery(anyString(), eq(ITEM_LIST_DIV_CSSQUERY)))
         .thenReturn("");
@@ -96,7 +96,7 @@ class EmartMallParserTest {
 
   @DisplayName("주어진 CSSQUERY에서 li 요소들을 찾을 수 없다면 예외가 발생한다")
   @Test
-  void throw_exception_when_can_not_find_li_element_from_givne_cssQuery() {
+  void throwExceptionWhenCanNotFindLiElementFromGivenCssQuery() {
     var htmlDocument = new HtmlDocument(TEST_HTML);
     when(htmlParser.getElementByCssQuery(anyString(), eq(ITEM_LIST_DIV_CSSQUERY)))
         .thenReturn(dummyDiv(ITEM_LIST_DIV_CSSQUERY));

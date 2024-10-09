@@ -18,7 +18,7 @@ class ItemUrlTest {
       "test",
       "/image/test.jpg"
   })
-  void throw_exception_when_invalid_url_pattern(String given) {
+  void throwExceptionWhenInvalidUrlPattern(String given) {
     assertThatThrownBy(() -> new ItemUrl(given))
         .isInstanceOf(InvalidUrlException.class);
   }
@@ -31,7 +31,7 @@ class ItemUrlTest {
       "https://test.com:8080/image/image.jpg",
       "https://test.com/search?key1=value1&key2=value2"
   })
-  void create_ItemUrl_when_url_is_valid(String given) {
+  void createItemUrlWhenUrlIsValid(String given) {
     var itemUrl = new ItemUrl(given);
 
     assertThat(itemUrl.getValue()).isEqualTo(given);

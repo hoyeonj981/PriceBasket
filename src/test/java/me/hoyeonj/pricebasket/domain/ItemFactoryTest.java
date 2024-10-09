@@ -33,7 +33,7 @@ class ItemFactoryTest {
 
   @DisplayName("주어진 input 데이터로 emartMall 상품을 생성한다")
   @Test
-  void create_emart_mall_item_should_item_with_correct_data() {
+  void createEmartMallItemShouldItemWithCorrectData() {
     var input = createDummyInput();
     var mockUnitPrice = mock(UnitPrice.class);
     try (var mockedStatic = mockStatic(UnitPrice.class)) {
@@ -62,7 +62,7 @@ class ItemFactoryTest {
 
   @DisplayName("주어진 input 데이터로 homeplus 상품을 생성한다")
   @Test
-  void create_homeplus_item_should_item_with_correct_data() {
+  void createHomeplusItemShouldItemWithCorrectData() {
     var input = createDummyInput();
     var mockUnitPrice = mock(UnitPrice.class);
     try (var mockedStatic = mockStatic(UnitPrice.class)) {

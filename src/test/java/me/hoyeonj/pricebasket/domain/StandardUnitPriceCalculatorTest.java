@@ -27,7 +27,7 @@ class StandardUnitPriceCalculatorTest {
       "1000, 1.5, L, 67",
       "5390, 3, l, 180"
   })
-  void calculate_unit_price_with_given_values(String totalPrice, BigDecimal totalAmount,
+  void calculateUnitPriceWithGivenValues(String totalPrice, BigDecimal totalAmount,
       String unitSymbol, String expectedPrice) {
     var expected = PriceWon.of(expectedPrice);
 
@@ -38,14 +38,14 @@ class StandardUnitPriceCalculatorTest {
 
   @DisplayName("총 가격이 0일 경우 예외가 발생한다")
   @Test
-  void throw_exception_when_total_price_is_zero() {
+  void throwExceptionWhenTotalPriceIsZero() {
     assertThatThrownBy(() -> calculator.calculate(PriceWon.ZERO, BigDecimal.ONE, "G"))
         .isInstanceOf(ZeroTotalPriceException.class);
   }
 
   @DisplayName("총 무게가 0일 경우 예외가 발생한다")
   @Test
-  void throw_exception_when_amount_is_zero() {
+  void throwExceptionWhenAmountIsZero() {
     assertThatThrownBy(() -> calculator.calculate(PriceWon.of(1000), BigDecimal.ZERO, "G"))
         .isInstanceOf(ZeroAmountException.class);
   }
