@@ -16,7 +16,7 @@ class HomePlusUrlTest {
 
   @DisplayName("유효한 HTTPS URL을 생성한다")
   @Test
-  void create_valid_https_url() {
+  void createValidHttpsUrl() {
     var testKeyword = "testKeyword";
     var searchUrl = HTTPS_SEARCH_URL.createSearchUrl(testKeyword);
 
@@ -37,7 +37,7 @@ class HomePlusUrlTest {
   @DisplayName("쿼리파라미터가 NULL, 공백, 빈문자열 일 경우 예외가 발생한다")
   @ParameterizedTest
   @MethodSource("queryParameters")
-  void throw_exception_when_query_parameter_is_null_or_empty_blank(final String value) {
+  void throwExceptionWhenQueryParameterIsNullOrEmptyOrBlank(final String value) {
     assertThatThrownBy(() -> HTTPS_SEARCH_URL.createSearchUrl(value))
         .isInstanceOf(InvalidQueryParameterException.class);
   }

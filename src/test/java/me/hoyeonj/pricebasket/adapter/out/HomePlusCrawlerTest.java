@@ -32,7 +32,7 @@ class HomePlusCrawlerTest {
 
   @DisplayName("주어진 검색어로 검색 후 파싱된 결과를 가져온다")
   @Test
-  void get_parsed_document_using_given_query() {
+  void getParsedDocumentUsingGivenQuery() {
     var parameters = "givenParameters";
     var htmlDocument = new HtmlDocument(TEST_HTML);
     var expectedQuery = new HomePlusSearchQuery(parameters);
@@ -55,8 +55,8 @@ class HomePlusCrawlerTest {
         .price("1000")
         .unitOfPrice("10g of 1000")
         .rating("4.8")
-        .detailsUrl("testUrl").
-        imageUrl("testUrl")
+        .detailsUrl("testUrl")
+        .imageUrl("testUrl")
         .build();
   }
 }

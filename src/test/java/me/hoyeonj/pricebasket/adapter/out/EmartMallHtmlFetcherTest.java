@@ -33,7 +33,7 @@ class EmartMallHtmlFetcherTest {
 
   @DisplayName("쿼리결과는 HTML를 가져와야 한다")
   @Test
-  void query_result_should_have_html() {
+  void queryResultShouldHaveHtml() {
     var keyword = "test";
     var testUrl = "https://test.com";
     var searchQuery = new EmartMallSearchQuery(keyword);
@@ -48,7 +48,7 @@ class EmartMallHtmlFetcherTest {
 
   @DisplayName("잘못된 HTML 형식은 예외가 발생한다")
   @Test
-  void throw_exception_when_html_format_is_not_correct() {
+  void throwExceptionWhenHtmlFormatIsWrong() {
     var mockHtml = "{\"test\":\"test\"}";
     var keyword = "test";
     var testUrl = "https://test.com";
@@ -62,7 +62,7 @@ class EmartMallHtmlFetcherTest {
 
   @DisplayName("쿼리결과가 404 에러가 발생하면 예외가 발생한다")
   @Test
-  void thorw_exception_when_query_result_has_404_error() {
+  void throwExceptionWhenQueryResultHas404Error() {
     var keyword = "test";
     var testUrl = "https://test.com";
     var searchQuery = new EmartMallSearchQuery(keyword);
@@ -75,7 +75,7 @@ class EmartMallHtmlFetcherTest {
 
   @DisplayName("쿼리결과가 500 에러가 발생하면 예외가 발생한다")
   @Test
-  void throw_exception_when_query_result_has_500_error() {
+  void throwExceptionWhenQueryResultHas500Error() {
     var keyword = "test";
     var testUrl = "https://test.com";
     var searchQuery = new EmartMallSearchQuery(keyword);

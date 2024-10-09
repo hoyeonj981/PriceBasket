@@ -91,7 +91,8 @@ checkstyle {
 }
 
 spotbugs {
-	toolVersion = '4.8.6'
+	toolVersion = '4.8.5'
+	excludeFilter = file('spotbugs-exclude.xml')
 }
 
 
@@ -99,6 +100,13 @@ tasks.spotbugsMain {
 	reports.create("html") {
 		required = true
 		outputLocation = layout.buildDirectory.file('reports/spotbugs/spotbugs.html')
+		setStylesheet("fancy-hist.xsl")
+	}
+}
+
+tasks.spotbugsTest {
+	reports.create("html") {
+		outputLocation = layout.buildDirectory.file('reports/spotbugs/spotbugs-test.html')
 		setStylesheet("fancy-hist.xsl")
 	}
 }
