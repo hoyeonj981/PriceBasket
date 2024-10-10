@@ -26,10 +26,7 @@ public class Quantity {
 
   public int increaseQuantity(final int amount) {
     validateNegativeAmount(amount);
-    return this.value.updateAndGet(current -> {
-      final var result = current + amount;
-      return result;
-    });
+    return this.value.updateAndGet(current -> current + amount);
   }
 
   private void validateNegativeAmount(final int amount) {
