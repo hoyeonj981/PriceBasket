@@ -16,7 +16,7 @@ class MeasurementTypeTest {
       "", " ",
       "oz", "lb", "t", "gz"
   })
-  void throwExceptionWhenSymbolIsNotExist(String given) {
+  void throwExceptionWhenSymbolDoesNotExist(String given) {
     assertThatThrownBy(() -> from(given))
         .isInstanceOf(NotSupportedUnitException.class);
   }
