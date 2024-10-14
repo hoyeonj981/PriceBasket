@@ -2,7 +2,7 @@ package me.hoyeonj.pricebasket.domain;
 
 import java.util.Objects;
 
-class BasketItem {
+public class BasketItem {
 
   private final ItemId itemId;
   private final Quantity quantity;
