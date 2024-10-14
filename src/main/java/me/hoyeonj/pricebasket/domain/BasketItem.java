@@ -16,7 +16,7 @@ class BasketItem {
   }
 
   private BasketItem(final ItemId itemId) {
-    this(itemId, new Quantity());
+    this(itemId, new Quantity(1));
   }
 
   private BasketItem(final ItemId itemId, final Quantity quantity) {

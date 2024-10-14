@@ -15,7 +15,7 @@ class BasketItemTest {
     var actual = new BasketItem(givenId);
 
     assertThat(actual.getItemId()).isEqualTo(givenId);
-    assertThat(actual.getQuantity()).isEqualTo(0);
+    assertThat(actual.getQuantity()).isEqualTo(1);
   }
 
   @DisplayName("상품 id와 수량을 받아 객체를 생성한다")
@@ -36,10 +36,11 @@ class BasketItemTest {
     var givenId = "1";
     var givenAmount = 3;
     var basketItem = new BasketItem(givenId);
+    var expected = givenAmount + 1;
 
     var actual = basketItem.increaseQuantity(givenAmount);
 
-    assertThat(actual).isEqualTo(givenAmount);
+    assertThat(actual).isEqualTo(expected);
   }
 
   @DisplayName("상품 수량을 1개 올린다")
