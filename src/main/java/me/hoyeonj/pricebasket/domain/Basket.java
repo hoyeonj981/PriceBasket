@@ -108,6 +108,10 @@ public class Basket {
     return this.items.size();
   }
 
+  public LocalDateTime getUpdatedAt() {
+    return updatedAt;
+  }
+
   private void updateModificationTime() {
     this.updatedAt = LocalDateTime.now();
   }
