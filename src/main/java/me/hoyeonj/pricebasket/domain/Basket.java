@@ -29,14 +29,6 @@ public class Basket {
     this.updatedAt = createdAt;
   }
 
-  private Basket(final BasketId basketId, final List<BasketItem> items,
-      final LocalDateTime createdAt, final LocalDateTime updatedAt) {
-    this.basketId = basketId;
-    this.items = items;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
-  }
-
   public void clear() {
     this.items.clear();
     updateModificationTime();
