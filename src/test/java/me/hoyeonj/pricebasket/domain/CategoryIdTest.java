@@ -32,4 +32,40 @@ class CategoryIdTest {
 
     assertThat(id.matches(UUID_REGEX)).isTrue();
   }
+
+  @DisplayName("id 값이 같다면 같은 객체이다")
+  @Test
+  void SameObjectIfIdValueIsSame() {
+    var givenId1 = "1";
+    var givenId2 = "1";
+
+    var id1 = CategoryId.from(givenId1);
+    var id2 = CategoryId.from(givenId2);
+
+    assertThat(id1).isEqualTo(id2);
+  }
+
+  @DisplayName("id 값이 다르다면 다른 객체이다")
+  @Test
+  void NotSameObjectIfIdValueIsDifferent() {
+    var givenId1 = "1";
+    var givenId2 = "2";
+
+    var id1 = CategoryId.from(givenId1);
+    var id2 = CategoryId.from(givenId2);
+
+    assertThat(id1).isNotEqualTo(id2);
+  }
+
+  @DisplayName("id 값이 같다면 같은 hashcode를 가진다")
+  @Test
+  void SameHashCodeIfIdValueIsSame() {
+    var givenId1 = "1";
+    var givenId2 = "1";
+
+    var id1 = CategoryId.from(givenId1);
+    var id2 = CategoryId.from(givenId2);
+
+    assertThat(id1.hashCode()).isEqualTo(id2.hashCode());
+  }
 }

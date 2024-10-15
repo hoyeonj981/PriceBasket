@@ -31,4 +31,46 @@ class CategoryTest {
     assertThat(actual.getCategoryId()).isEqualTo(givenId);
     assertThat(actual.getName()).isEqualTo(givenName);
   }
+
+  @DisplayName("id값과 이름이 같다면 같은 객체이다")
+  @Test
+  void SameObjectIfIdAndNameIsSame() {
+    var givenId1 = "1";
+    var givenName1 = "category1";
+    var givenId2 = "1";
+    var givenName2 = "category1";
+
+    var category1 = new Category(CategoryId.from(givenId1), givenName1);
+    var category2 = new Category(CategoryId.from(givenId2), givenName2);
+
+    assertThat(category1).isEqualTo(category2);
+  }
+
+  @DisplayName("id값과 이름이 다르다면 같은 객체이다")
+  @Test
+  void NotSameObjectIfIdAndNameIsDifferent() {
+    var givenId1 = "1";
+    var givenName1 = "category1";
+    var givenId2 = "2";
+    var givenName2 = "category2";
+
+    var category1 = new Category(CategoryId.from(givenId1), givenName1);
+    var category2 = new Category(CategoryId.from(givenId2), givenName2);
+
+    assertThat(category1).isNotEqualTo(category2);
+  }
+
+  @DisplayName("id값과 이름이 같다면 같은 hashcode를 가진다")
+  @Test
+  void SameHashCodeIfIdAndNameIsSame() {
+    var givenId1 = "1";
+    var givenName1 = "category1";
+    var givenId2 = "1";
+    var givenName2 = "category1";
+
+    var category1 = new Category(CategoryId.from(givenId1), givenName1);
+    var category2 = new Category(CategoryId.from(givenId2), givenName2);
+
+    assertThat(category1.hashCode()).isEqualTo(category2.hashCode());
+  }
 }
