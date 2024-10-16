@@ -33,6 +33,14 @@ class ClientPasswordTest {
     assertThat(actual.getPassword()).isEqualTo(hashedPassword);
   }
 
+  @DisplayName("임시 비밀번호를 생성한다")
+  @Test
+  void createTemporaryPassword() {
+    var actual = ClientPassword.createTemporary();
+
+    assertThat(actual.getPassword()).contains("");
+  }
+
   @DisplayName("비밀번호 값이 같다면 같은 객체이다")
   @Test
   void sameObjectWhenPasswordValueIsSame() {

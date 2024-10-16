@@ -12,6 +12,10 @@ public class ClientPassword {
     return new ClientPassword(encoder.encode(rawPassword));
   }
 
+  public static ClientPassword createTemporary() {
+    return new ClientPassword("");
+  }
+
   private ClientPassword(final String value) {
     this.value = value;
   }
