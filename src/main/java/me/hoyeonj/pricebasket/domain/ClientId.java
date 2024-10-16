@@ -11,6 +11,10 @@ public class ClientId {
     return new ClientId(UUID.randomUUID().toString());
   }
 
+  static ClientId createTemporary() {
+    return new ClientId("guest-" + UUID.randomUUID().toString());
+  }
+
   static ClientId from(final String id) {
     return new ClientId(id);
   }

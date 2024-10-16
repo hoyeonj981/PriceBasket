@@ -68,4 +68,12 @@ class ClientIdTest {
 
     assertThat(id1.hashCode()).isEqualTo(id2.hashCode());
   }
+
+  @DisplayName("임시로 사용되는 id를 생성한다")
+  @Test
+  void createTemporaryClientId() {
+    var actual = ClientId.createTemporary();
+
+    assertThat(actual.getValue()).contains("guest");
+  }
 }
