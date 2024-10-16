@@ -9,6 +9,13 @@ public class Client {
   private final ClientPassword password;
   private final ClientType clientType;
 
+  public static Client createGuest() {
+    final var temporaryId = ClientId.createTemporary();
+    final var guestEmail = ClientEmail.createGuestEmail(temporaryId.getValue());
+    final var temporaryPassword = ClientPassword.createTemporary();
+    return new Client(temporaryId, guestEmail, temporaryPassword, ClientType.GUEST);
+  }
+
   public static Client create(final String email, final String rawPassword,
       final PasswordEncoder encoder, final PasswordValidator validator) {
     final var clientEmail = ClientEmail.from(email);
