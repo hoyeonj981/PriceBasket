@@ -3,6 +3,7 @@ package me.hoyeonj.pricebasket.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.UUID;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -26,7 +27,7 @@ class ClientEmailTest {
       "username@domain.verylongtld"
   })
   void throwExceptionWhenInvalidEmailPattern(String given) {
-    assertThatThrownBy(() -> new ClientEmail(given))
+    assertThatThrownBy(() -> ClientEmail.from(given))
         .isInstanceOf(InvalidEmailException.class);
   }
 
@@ -35,9 +36,19 @@ class ClientEmailTest {
   void createObjectWhenValidEmailPattern() {
     var given = "hoyeonj981@google.com";
 
-    var actual = new ClientEmail(given);
+    var actual = ClientEmail.from(given);
 
     assertThat(actual.getEmail()).isEqualTo(given);
+  }
+
+  @DisplayName("임시 Client를 위한 ClientEmail을 생성한다")
+  @Test
+  void createClientEmailForGuest() {
+    var temporary = ClientId.createTemporary();
+
+    var actual = ClientEmail.createGuestEmail(temporary.getValue());
+
+    assertThat(actual.getEmail()).contains("guest");
   }
 
   @DisplayName("이메일이 같다면 같은 객체이다")
@@ -46,8 +57,8 @@ class ClientEmailTest {
     var given1 = "hoyeonj981@google.com";
     var given2 = "hoyeonj981@google.com";
 
-    var email1 = new ClientEmail(given1);
-    var email2 = new ClientEmail(given2);
+    var email1 = ClientEmail.from(given1);
+    var email2 = ClientEmail.from(given2);
 
     assertThat(email1).isEqualTo(email2);
   }
@@ -58,8 +69,8 @@ class ClientEmailTest {
     var given1 = "hoyeonj981@google.com";
     var given2 = "ghdus8938@naver.com";
 
-    var email1 = new ClientEmail(given1);
-    var email2 = new ClientEmail(given2);
+    var email1 = ClientEmail.from(given1);
+    var email2 = ClientEmail.from(given2);
 
     assertThat(email1).isNotEqualTo(email2);
   }
@@ -70,8 +81,8 @@ class ClientEmailTest {
     var given1 = "hoyeonj981@google.com";
     var given2 = "hoyeonj981@google.com";
 
-    var email1 = new ClientEmail(given1);
-    var email2 = new ClientEmail(given2);
+    var email1 = ClientEmail.from(given1);
+    var email2 = ClientEmail.from(given2);
 
     assertThat(email1.hashCode()).isEqualTo(email2.hashCode());
   }
@@ -82,8 +93,8 @@ class ClientEmailTest {
     var given1 = "hoyeonj981@google.com";
     var given2 = "ghdus8938@naver.com";
 
-    var email1 = new ClientEmail(given1);
-    var email2 = new ClientEmail(given2);
+    var email1 = ClientEmail.from(given1);
+    var email2 = ClientEmail.from(given2);
 
     assertThat(email1.hashCode()).isNotEqualTo(email2.hashCode());
   }

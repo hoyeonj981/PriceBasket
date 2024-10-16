@@ -11,15 +11,23 @@ public class ClientEmail {
 
   private final String value;
 
-  public ClientEmail(final String value) {
-    validateEmail(value);
-    this.value = value;
+  public static ClientEmail from(final String email) {
+    validateEmail(email);
+    return new ClientEmail(email);
   }
 
-  private void validateEmail(final String value) {
+  public static ClientEmail createGuestEmail(final String id) {
+    return new ClientEmail(id);
+  }
+
+  private static void validateEmail(final String value) {
     if (Objects.isNull(value) || !isMatches(value)) {
       throw new InvalidEmailException("유효하지 않는 이메일 형식입니다. - " + value);
     }
+  }
+
+  private ClientEmail(final String value) {
+    this.value = value;
   }
 
   private static boolean isMatches(final String value) {

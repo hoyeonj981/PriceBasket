@@ -11,14 +11,14 @@ public class Client {
 
   public static Client create(final String email, final String rawPassword,
       final PasswordEncoder encoder, final PasswordValidator validator) {
-    final var clientEmail = new ClientEmail(email);
+    final var clientEmail = ClientEmail.from(email);
     final var clientPassword = ClientPassword.create(rawPassword, encoder, validator);
     return new Client(ClientId.create(), clientEmail, clientPassword, ClientType.REGISTERD);
   }
 
   public static Client create(final String id, final String email, final String rawPassword,
       final PasswordEncoder encoder, final PasswordValidator validator) {
-    final var clientEmail = new ClientEmail(email);
+    final var clientEmail = ClientEmail.from(email);
     final var clientPassword = ClientPassword.create(rawPassword, encoder, validator);
     return new Client(ClientId.from(id), clientEmail, clientPassword, ClientType.REGISTERD);
   }
