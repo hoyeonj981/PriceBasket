@@ -1,6 +1,7 @@
 package me.hoyeonj.pricebasket.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PasswordValidator {
@@ -8,7 +9,7 @@ public class PasswordValidator {
   private final List<PasswordRule> validators;
 
   public PasswordValidator(final List<PasswordRule> validators) {
-    this.validators = validators;
+    this.validators = Collections.unmodifiableList(new ArrayList<>(validators));
   }
 
   public void validate(final String rawPassword) {
