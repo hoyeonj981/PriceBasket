@@ -4,6 +4,11 @@ import java.util.Objects;
 
 public class Category {
 
+  static final String UNCATEGORIZED_NAME = "ETC";
+
+  public static Category UNCATEGORIZED = new Category(CategoryId.uncategorized(),
+      UNCATEGORIZED_NAME);
+
   private final CategoryId categoryId;
   private final String name;
 

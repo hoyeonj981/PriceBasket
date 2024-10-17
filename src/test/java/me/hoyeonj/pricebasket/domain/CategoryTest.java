@@ -32,6 +32,15 @@ class CategoryTest {
     assertThat(actual.getName()).isEqualTo(givenName);
   }
 
+  @DisplayName("미분류된 카테고리는 고정된 id값과 이름을 가진다")
+  @Test
+  void unspecifiedCategoryHasFixedIdAndName() {
+    var uncategorized = Category.UNCATEGORIZED;
+
+    assertThat(uncategorized.getCategoryId()).isEqualTo(CategoryId.UNCATEGORIZED);
+    assertThat(uncategorized.getName()).isEqualTo(Category.UNCATEGORIZED_NAME);
+  }
+
   @DisplayName("id값과 이름이 같다면 같은 객체이다")
   @Test
   void SameObjectIfIdAndNameIsSame() {
