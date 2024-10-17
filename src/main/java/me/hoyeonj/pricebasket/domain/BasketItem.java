@@ -53,12 +53,11 @@ public class BasketItem {
       return false;
     }
     final BasketItem that = (BasketItem) o;
-    return Objects.equals(itemId, that.itemId) && Objects.equals(quantity,
-        that.quantity);
+    return Objects.equals(itemId, that.itemId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(itemId, quantity);
+    return Objects.hash(itemId);
   }
 }

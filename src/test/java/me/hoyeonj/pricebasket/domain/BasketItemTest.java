@@ -81,4 +81,28 @@ class BasketItemTest {
 
     assertThat(actual).isEqualTo(expected);
   }
+
+  @DisplayName("BasketItem은 ItemId 값이 같다면 같은 객체이다")
+  @Test
+  void sameObjectWhenItemIdIsSame() {
+    var givenId1 = "1";
+    var givenId2 = givenId1;
+
+    var basketItem1 = BasketItem.create(givenId1);
+    var basketItem2 = BasketItem.create(givenId2);
+
+    assertThat(basketItem1).isEqualTo(basketItem2);
+  }
+
+  @DisplayName("BasketItem은 ItemId 값이 같다면 hash code도 같다")
+  @Test
+  void sameHashCodeWhenItemIdIsSame() {
+    var givenId1 = "1";
+    var givenId2 = givenId1;
+
+    var basketItem1 = BasketItem.create(givenId1);
+    var basketItem2 = BasketItem.create(givenId2);
+
+    assertThat(basketItem1.hashCode()).isEqualTo(basketItem2.hashCode());
+  }
 }
