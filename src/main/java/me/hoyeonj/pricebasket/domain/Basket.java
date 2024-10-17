@@ -11,20 +11,22 @@ public class Basket {
 
   private final BasketId basketId;
   private final List<BasketItem> items;
+  private final String userId;
   private final LocalDateTime createdAt;
   private LocalDateTime updatedAt;
 
-  public static Basket withoutId() {
-    return new Basket(BasketId.create(), new ArrayList<>());
+  public static Basket withoutId(final String userId) {
+    return new Basket(BasketId.create(), new ArrayList<>(), userId);
   }
 
-  public static Basket withId(final String id) {
-    return new Basket(BasketId.from(id), new ArrayList<>());
+  public static Basket withId(final String basketId, final String userId) {
+    return new Basket(BasketId.from(basketId), new ArrayList<>(), userId);
   }
 
-  private Basket(final BasketId basketId, final List<BasketItem> items) {
+  private Basket(final BasketId basketId, final List<BasketItem> items, final String userId) {
     this.basketId = basketId;
     this.items = items;
+    this.userId = userId;
     this.createdAt = LocalDateTime.now();
     this.updatedAt = createdAt;
   }

@@ -11,7 +11,8 @@ class BasketTest {
   @DisplayName("장바구니의 모든 상품을 비운다")
   @Test
   void clearAllBasketItems() {
-    var basket = Basket.withoutId();
+    var dummyUserId = "1";
+    var basket = Basket.withoutId(dummyUserId);
     basket.addItem(new BasketItem(String.valueOf(1)));
     basket.addItem(new BasketItem(String.valueOf(2)));
     basket.addItem(new BasketItem(String.valueOf(3)));
@@ -26,7 +27,8 @@ class BasketTest {
   @DisplayName("장바구니에 상품을 추가할 수 있다")
   @Test
   void addBasketItems() {
-    var basket = Basket.withoutId();
+    var dummyUserId = "1";
+    var basket = Basket.withoutId(dummyUserId);
     var expected = 3;
 
     basket.addItem(new BasketItem(String.valueOf(1)));
@@ -39,7 +41,8 @@ class BasketTest {
   @DisplayName("장바구니 상품을 삭제할 수 있다")
   @Test
   void removeBasketItems() {
-    var basket = Basket.withoutId();
+    var dummyUserId = "1";
+    var basket = Basket.withoutId(dummyUserId);
     var item = new BasketItem(String.valueOf(1));
     basket.addItem(item);
     basket.addItem(new BasketItem(String.valueOf(2)));
@@ -54,7 +57,8 @@ class BasketTest {
   @DisplayName("존재하지 않는 상품을 삭제할 경우 예외가 발생한다")
   @Test
   void throwExceptionWhenRemoveItemIfItemDoesNotExist() {
-    var basket = Basket.withoutId();
+    var dummyUserId = "1";
+    var basket = Basket.withoutId(dummyUserId);
     var item = new BasketItem(String.valueOf(1));
 
     assertThatThrownBy(() -> basket.removeItem(item))
@@ -65,7 +69,8 @@ class BasketTest {
   @Test
   void increaseBasketItemQuantity() {
     var givenQuantity = 5;
-    var basket = Basket.withoutId();
+    var dummyUserId = "1";
+    var basket = Basket.withoutId(dummyUserId);
     var item = new BasketItem(String.valueOf(1));
     basket.addItem(item);
     var expected = givenQuantity + 1;
@@ -78,7 +83,8 @@ class BasketTest {
   @DisplayName("존재하지 않는 상품을 증가시킬 경우 예외가 발생한다")
   @Test
   void throwExceptionWhenIncreaseItemIfItemDoesNotExist() {
-    var basket = Basket.withoutId();
+    var dummyUserId = "1";
+    var basket = Basket.withoutId(dummyUserId);
     var item = new BasketItem(String.valueOf(1));
 
     assertThatThrownBy(() -> basket.increaseItemQuantity(item, 10))
@@ -88,7 +94,8 @@ class BasketTest {
   @DisplayName("장바구니 상품 수량을 한 개 증가시킬 수 있다")
   @Test
   void increaseOneBasketItemQuantity() {
-    var basket = Basket.withoutId();
+    var dummyUserId = "1";
+    var basket = Basket.withoutId(dummyUserId);
     var item = new BasketItem(String.valueOf(1));
     basket.addItem(item);
 
@@ -100,7 +107,8 @@ class BasketTest {
   @DisplayName("존재하지 않는 상품을 한개 증가시킬 경우 예외가 발생한다")
   @Test
   void throwExceptionWhenIncreaseOneItemIfItemDoesNotExist() {
-    var basket = Basket.withoutId();
+    var dummyUserId = "1";
+    var basket = Basket.withoutId(dummyUserId);
     var item = new BasketItem(String.valueOf(1));
 
     assertThatThrownBy(() -> basket.increaseItemQuantity(item))
@@ -111,7 +119,8 @@ class BasketTest {
   @Test
   void decreaseBasketItemQuantity() {
     var givenQuantity = 5;
-    var basket = Basket.withoutId();
+    var dummyUserId = "1";
+    var basket = Basket.withoutId(dummyUserId);
     var item = new BasketItem(String.valueOf(1), givenQuantity);
     basket.addItem(item);
     var decreasingQuantity = 2;
@@ -125,7 +134,8 @@ class BasketTest {
   @DisplayName("존재하지 않는 상품을 감소할 경우 예외가 발생한다")
   @Test
   void throwExceptionWhenDecreaseItemIfItemDoesNotExist() {
-    var basket = Basket.withoutId();
+    var dummyUserId = "1";
+    var basket = Basket.withoutId(dummyUserId);
     var item = new BasketItem(String.valueOf(1));
 
     assertThatThrownBy(() -> basket.decreaseItemQuantity(item, 10))
@@ -136,7 +146,8 @@ class BasketTest {
   @Test
   void decreaseOneBasketItemQuantity() {
     var givenQuantity = 5;
-    var basket = Basket.withoutId();
+    var dummyUserId = "1";
+    var basket = Basket.withoutId(dummyUserId);
     var item = new BasketItem(String.valueOf(1), givenQuantity);
     basket.addItem(item);
     var decreasingQuantity = 1;
@@ -150,7 +161,8 @@ class BasketTest {
   @DisplayName("존재하지 않는 상품을 한개 감소할 경우 예외가 발생한다")
   @Test
   void throwExceptionWhenDecreaseOneItemIfItemDoesNotExist() {
-    var basket = Basket.withoutId();
+    var dummyUserId = "1";
+    var basket = Basket.withoutId(dummyUserId);
     var item = new BasketItem(String.valueOf(1));
 
     assertThatThrownBy(() -> basket.decreaseItemQuantity(item))
@@ -160,7 +172,8 @@ class BasketTest {
   @DisplayName("현재 장바구니 상품 종류 수를 얻는다")
   @Test
   void getItemsCount() {
-    var basket = Basket.withoutId();
+    var dummyUserId = "1";
+    var basket = Basket.withoutId(dummyUserId);
     basket.addItem(new BasketItem(String.valueOf(1)));
     basket.addItem(new BasketItem(String.valueOf(2)));
 
@@ -170,7 +183,8 @@ class BasketTest {
   @DisplayName("현재 장바구니 상품의 수량를 얻는다")
   @Test
   void getAllItemsQuantity() {
-    var basket = Basket.withoutId();
+    var dummyUserId = "1";
+    var basket = Basket.withoutId(dummyUserId);
     var givenQuantity = 10;
     var item = new BasketItem(String.valueOf(1), givenQuantity);
     basket.addItem(item);
@@ -181,7 +195,8 @@ class BasketTest {
   @DisplayName("존재하지 않는 상품 수량 조회는 예외가 발생한다")
   @Test
   void throwExceptionWhenGetItemQuantityIfItemDoesNotExist() {
-    var basket = Basket.withoutId();
+    var dummyUserId = "1";
+    var basket = Basket.withoutId(dummyUserId);
     var givenQuantity = 10;
     var item = new BasketItem(String.valueOf(1), givenQuantity);
 
