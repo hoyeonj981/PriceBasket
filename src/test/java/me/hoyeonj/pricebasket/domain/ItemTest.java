@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.UUID;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,6 +22,7 @@ class ItemTest {
 
     assertThat(actual.getId()).isNotNull();
     assertThat(actual.getMallType()).isEqualTo(givenMall);
+    assertThat(actual.getCategoryId()).isEqualTo(CategoryId.UNCATEGORIZED);
     assertThat(actual.getCreatedAt()).isNotNull();
     assertThat(actual.getCreatedAt()).isEqualTo(actual.getUpdatedAt());
   }
@@ -36,6 +38,7 @@ class ItemTest {
 
     assertThat(actual.getId()).isEqualTo(id);
     assertThat(actual.getMallType()).isEqualTo(givenMall);
+    assertThat(actual.getCategoryId()).isEqualTo(CategoryId.UNCATEGORIZED);
     assertThat(actual.getCreatedAt()).isNotNull();
     assertThat(actual.getCreatedAt()).isEqualTo(actual.getUpdatedAt());
   }
@@ -51,14 +54,31 @@ class ItemTest {
     var originalItem = Item.withoutId(originalItemInfo, MallType.EMARTMALL);
     var updatedItem = originalItem.updateTotalPrice(newPrice);
 
-    assertThat(originalItem).isNotEqualTo(updatedItem);
     assertThat(originalItem.getId()).isEqualTo(updatedItem.getId());
     assertThat(originalItem.getMallType()).isEqualTo(updatedItem.getMallType());
+    assertThat(originalItem.getCategoryId()).isEqualTo(CategoryId.UNCATEGORIZED);
     assertThat(originalItem.getCreatedAt()).isEqualTo(updatedItem.getCreatedAt());
     assertThat(updatedItem.getUpdatedAt().isAfter(originalItem.getUpdatedAt())).isTrue();
   }
 
-  @DisplayName("상품은 id, itemInfo, MallType이 다르다면 다른 객체이다")
+  @DisplayName("카테고리를 업데이트할 경우 새로운 객체를 생성한다")
+  @Test
+  void updateCategoryMethodCreatesNewObject() {
+    var originalItemInfo = mock(ItemInfo.class);
+    var newCategoryId = UUID.randomUUID().toString();
+
+    var originalItem = Item.withoutId(originalItemInfo, MallType.EMARTMALL);
+    var updatedItem = originalItem.updateCategory(newCategoryId);
+
+    assertThat(originalItem.getId()).isEqualTo(updatedItem.getId());
+    assertThat(originalItem.getMallType()).isEqualTo(updatedItem.getMallType());
+    assertThat(originalItem.getCategoryId()).isEqualTo(CategoryId.UNCATEGORIZED);
+    assertThat(originalItem.getCreatedAt()).isEqualTo(updatedItem.getCreatedAt());
+    assertThat(updatedItem.getCategoryId()).isEqualTo(newCategoryId);
+    assertThat(updatedItem.getUpdatedAt().isAfter(originalItem.getUpdatedAt())).isTrue();
+  }
+
+  @DisplayName("상품은 id가 다르다면 다른 객체이다")
   @Test
   void sameObjectWhenPropertiesAreSame() {
     var itemInfo1 = mock(ItemInfo.class);

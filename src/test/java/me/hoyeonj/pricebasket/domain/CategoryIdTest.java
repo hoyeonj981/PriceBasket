@@ -33,6 +33,15 @@ class CategoryIdTest {
     assertThat(id.matches(UUID_REGEX)).isTrue();
   }
 
+  @DisplayName("지정이 안된 카테고리 id값은 고정된 값이다")
+  @Test
+  void unspecifiedCategoryIdValueIsFixed() {
+    var uncategorized = CategoryId.uncategorized();
+    var id = uncategorized.getValue();
+
+    assertThat(id).isEqualTo(CategoryId.UNCATEGORIZED);
+  }
+
   @DisplayName("id 값이 같다면 같은 객체이다")
   @Test
   void SameObjectIfIdValueIsSame() {

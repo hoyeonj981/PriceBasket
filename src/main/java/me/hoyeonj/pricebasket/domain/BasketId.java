@@ -41,4 +41,3 @@ public class BasketId {
     return Objects.hash(value);
   }
 }
-

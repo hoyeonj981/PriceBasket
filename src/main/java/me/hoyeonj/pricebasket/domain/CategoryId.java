@@ -5,7 +5,13 @@ import java.util.UUID;
 
 public class CategoryId {
 
+  static final String UNCATEGORIZED = "UNCATEGORIZED";
+
   private final String value;
+
+  static CategoryId uncategorized() {
+    return new CategoryId(UNCATEGORIZED);
+  }
 
   static CategoryId create() {
     return new CategoryId(UUID.randomUUID().toString());

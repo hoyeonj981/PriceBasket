@@ -12,7 +12,7 @@ class BasketItemTest {
   void createBasketItemWWithId() {
     var givenId = "1";
 
-    var actual = new BasketItem(givenId);
+    var actual = BasketItem.create(givenId);
 
     assertThat(actual.getItemId()).isEqualTo(givenId);
     assertThat(actual.getQuantity()).isEqualTo(1);
@@ -24,7 +24,7 @@ class BasketItemTest {
     var givenId = "1";
     var givenQuantity = 5;
 
-    var actual = new BasketItem(givenId, givenQuantity);
+    var actual = BasketItem.create(givenId, givenQuantity);
 
     assertThat(actual.getItemId()).isEqualTo(givenId);
     assertThat(actual.getQuantity()).isEqualTo(givenQuantity);
@@ -35,7 +35,7 @@ class BasketItemTest {
   void increaseQuantityWithGivenAmount() {
     var givenId = "1";
     var givenAmount = 3;
-    var basketItem = new BasketItem(givenId);
+    var basketItem = BasketItem.create(givenId);
     var expected = givenAmount + 1;
 
     var actual = basketItem.increaseQuantity(givenAmount);
@@ -48,7 +48,7 @@ class BasketItemTest {
   void increaseQuantityOne() {
     var givenId = "1";
     var givenAmount = 3;
-    var basketItem = new BasketItem(givenId, givenAmount);
+    var basketItem = BasketItem.create(givenId, givenAmount);
     var expected = givenAmount + 1;
 
     var actual = basketItem.increaseQuantityOne();
@@ -61,7 +61,7 @@ class BasketItemTest {
   void decreaseQuantityWithGivenAmount() {
     var givenId = "1";
     var givenQuantity = 5;
-    var basketItem = new BasketItem(givenId, givenQuantity);
+    var basketItem = BasketItem.create(givenId, givenQuantity);
     var expected = 3;
 
     var actual = basketItem.decreaseQuantity(givenQuantity - expected);
@@ -74,11 +74,35 @@ class BasketItemTest {
   void decreaseQuantityOne() {
     var givenId = "1";
     var givenQuantity = 3;
-    var basketItem = new BasketItem(givenId, givenQuantity);
+    var basketItem = BasketItem.create(givenId, givenQuantity);
     var expected = givenQuantity - 1;
 
     var actual = basketItem.decreaseQuantityOne();
 
     assertThat(actual).isEqualTo(expected);
+  }
+
+  @DisplayName("BasketItem은 ItemId 값이 같다면 같은 객체이다")
+  @Test
+  void sameObjectWhenItemIdIsSame() {
+    var givenId1 = "1";
+    var givenId2 = givenId1;
+
+    var basketItem1 = BasketItem.create(givenId1);
+    var basketItem2 = BasketItem.create(givenId2);
+
+    assertThat(basketItem1).isEqualTo(basketItem2);
+  }
+
+  @DisplayName("BasketItem은 ItemId 값이 같다면 hash code도 같다")
+  @Test
+  void sameHashCodeWhenItemIdIsSame() {
+    var givenId1 = "1";
+    var givenId2 = givenId1;
+
+    var basketItem1 = BasketItem.create(givenId1);
+    var basketItem2 = BasketItem.create(givenId2);
+
+    assertThat(basketItem1.hashCode()).isEqualTo(basketItem2.hashCode());
   }
 }
