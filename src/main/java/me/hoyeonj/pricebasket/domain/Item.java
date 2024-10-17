@@ -125,13 +125,11 @@ public class Item {
       return false;
     }
     final Item item = (Item) o;
-    return Objects.equals(id, item.id) && Objects.equals(itemInfo, item.itemInfo)
-        && mallType == item.mallType && Objects.equals(categoryId, item.categoryId)
-        && Objects.equals(createdAt, item.createdAt);
+    return Objects.equals(id, item.id);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, itemInfo, mallType, categoryId, createdAt);
+    return Objects.hash(id);
   }
 }

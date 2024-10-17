@@ -54,7 +54,6 @@ class ItemTest {
     var originalItem = Item.withoutId(originalItemInfo, MallType.EMARTMALL);
     var updatedItem = originalItem.updateTotalPrice(newPrice);
 
-    assertThat(originalItem).isNotEqualTo(updatedItem);
     assertThat(originalItem.getId()).isEqualTo(updatedItem.getId());
     assertThat(originalItem.getMallType()).isEqualTo(updatedItem.getMallType());
     assertThat(originalItem.getCategoryId()).isEqualTo(CategoryId.UNCATEGORIZED);
@@ -71,7 +70,6 @@ class ItemTest {
     var originalItem = Item.withoutId(originalItemInfo, MallType.EMARTMALL);
     var updatedItem = originalItem.updateCategory(newCategoryId);
 
-    assertThat(originalItem).isNotEqualTo(updatedItem);
     assertThat(originalItem.getId()).isEqualTo(updatedItem.getId());
     assertThat(originalItem.getMallType()).isEqualTo(updatedItem.getMallType());
     assertThat(originalItem.getCategoryId()).isEqualTo(CategoryId.UNCATEGORIZED);
@@ -80,7 +78,7 @@ class ItemTest {
     assertThat(updatedItem.getUpdatedAt().isAfter(originalItem.getUpdatedAt())).isTrue();
   }
 
-  @DisplayName("상품은 id, itemInfo, MallType이 다르다면 다른 객체이다")
+  @DisplayName("상품은 id가 다르다면 다른 객체이다")
   @Test
   void sameObjectWhenPropertiesAreSame() {
     var itemInfo1 = mock(ItemInfo.class);
