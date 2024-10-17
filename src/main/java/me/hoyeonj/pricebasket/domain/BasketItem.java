@@ -4,22 +4,18 @@ import java.util.Objects;
 
 public class BasketItem {
 
-  private final ItemId itemId;
+  private final String itemId;
   private final Quantity quantity;
 
-  public BasketItem(final String id) {
-    this(ItemId.from(id));
+  public static BasketItem create(final String itemId, final int quantity) {
+    return new BasketItem(itemId, new Quantity(quantity));
   }
 
-  public BasketItem(final String id, final int quantity) {
-    this(ItemId.from(id), new Quantity(quantity));
+  public static BasketItem create(final String itemId) {
+    return new BasketItem(itemId, new Quantity(1));
   }
 
-  private BasketItem(final ItemId itemId) {
-    this(itemId, new Quantity(1));
-  }
-
-  private BasketItem(final ItemId itemId, final Quantity quantity) {
+  private BasketItem(final String itemId, final Quantity quantity) {
     this.itemId = itemId;
     this.quantity = quantity;
   }
@@ -41,11 +37,11 @@ public class BasketItem {
   }
 
   public String  getItemId() {
-    return itemId.getValue();
+    return this.itemId;
   }
 
   public int getQuantity() {
-    return quantity.getValue();
+    return this.quantity.getValue();
   }
 
   @Override

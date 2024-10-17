@@ -13,9 +13,9 @@ class BasketTest {
   void clearAllBasketItems() {
     var dummyClientId = "1";
     var basket = Basket.withoutId(dummyClientId);
-    basket.addItem(new BasketItem(String.valueOf(1)));
-    basket.addItem(new BasketItem(String.valueOf(2)));
-    basket.addItem(new BasketItem(String.valueOf(3)));
+    basket.addItem(BasketItem.create(String.valueOf(1)));
+    basket.addItem(BasketItem.create(String.valueOf(2)));
+    basket.addItem(BasketItem.create(String.valueOf(3)));
     var expected = 0;
 
     basket.clear();
@@ -31,9 +31,9 @@ class BasketTest {
     var basket = Basket.withoutId(dummyClientId);
     var expected = 3;
 
-    basket.addItem(new BasketItem(String.valueOf(1)));
-    basket.addItem(new BasketItem(String.valueOf(2)));
-    basket.addItem(new BasketItem(String.valueOf(3)));
+    basket.addItem(BasketItem.create(String.valueOf(1)));
+    basket.addItem(BasketItem.create(String.valueOf(2)));
+    basket.addItem(BasketItem.create(String.valueOf(3)));
 
     assertThat(basket.getItemsCount()).isEqualTo(expected);
   }
@@ -43,10 +43,10 @@ class BasketTest {
   void removeBasketItems() {
     var dummyClientId = "1";
     var basket = Basket.withoutId(dummyClientId);
-    var item = new BasketItem(String.valueOf(1));
+    var item = BasketItem.create(String.valueOf(1));
     basket.addItem(item);
-    basket.addItem(new BasketItem(String.valueOf(2)));
-    basket.addItem(new BasketItem(String.valueOf(3)));
+    basket.addItem(BasketItem.create(String.valueOf(2)));
+    basket.addItem(BasketItem.create(String.valueOf(3)));
     var expected = 2;
 
     basket.removeItem(item);
@@ -59,7 +59,7 @@ class BasketTest {
   void throwExceptionWhenRemoveItemIfItemDoesNotExist() {
     var dummyClientId = "1";
     var basket = Basket.withoutId(dummyClientId);
-    var item = new BasketItem(String.valueOf(1));
+    var item = BasketItem.create(String.valueOf(1));
 
     assertThatThrownBy(() -> basket.removeItem(item))
         .isInstanceOf(BasketItemNotFoundException.class);
@@ -71,7 +71,7 @@ class BasketTest {
     var givenQuantity = 5;
     var dummyClientId = "1";
     var basket = Basket.withoutId(dummyClientId);
-    var item = new BasketItem(String.valueOf(1));
+    var item = BasketItem.create(String.valueOf(1));
     basket.addItem(item);
     var expected = givenQuantity + 1;
 
@@ -85,7 +85,7 @@ class BasketTest {
   void throwExceptionWhenIncreaseItemIfItemDoesNotExist() {
     var dummyClientId = "1";
     var basket = Basket.withoutId(dummyClientId);
-    var item = new BasketItem(String.valueOf(1));
+    var item = BasketItem.create(String.valueOf(1));
 
     assertThatThrownBy(() -> basket.increaseItemQuantity(item, 10))
         .isInstanceOf(BasketItemNotFoundException.class);
@@ -96,7 +96,7 @@ class BasketTest {
   void increaseOneBasketItemQuantity() {
     var dummyClientId = "1";
     var basket = Basket.withoutId(dummyClientId);
-    var item = new BasketItem(String.valueOf(1));
+    var item = BasketItem.create(String.valueOf(1));
     basket.addItem(item);
 
     basket.increaseItemQuantity(item);
@@ -109,7 +109,7 @@ class BasketTest {
   void throwExceptionWhenIncreaseOneItemIfItemDoesNotExist() {
     var dummyClientId = "1";
     var basket = Basket.withoutId(dummyClientId);
-    var item = new BasketItem(String.valueOf(1));
+    var item = BasketItem.create(String.valueOf(1));
 
     assertThatThrownBy(() -> basket.increaseItemQuantity(item))
         .isInstanceOf(BasketItemNotFoundException.class);
@@ -121,7 +121,7 @@ class BasketTest {
     var givenQuantity = 5;
     var dummyClientId = "1";
     var basket = Basket.withoutId(dummyClientId);
-    var item = new BasketItem(String.valueOf(1), givenQuantity);
+    var item = BasketItem.create(String.valueOf(1), givenQuantity);
     basket.addItem(item);
     var decreasingQuantity = 2;
     var expected = givenQuantity - decreasingQuantity;
@@ -136,7 +136,7 @@ class BasketTest {
   void throwExceptionWhenDecreaseItemIfItemDoesNotExist() {
     var dummyClientId = "1";
     var basket = Basket.withoutId(dummyClientId);
-    var item = new BasketItem(String.valueOf(1));
+    var item = BasketItem.create(String.valueOf(1));
 
     assertThatThrownBy(() -> basket.decreaseItemQuantity(item, 10))
         .isInstanceOf(BasketItemNotFoundException.class);
@@ -148,7 +148,7 @@ class BasketTest {
     var givenQuantity = 5;
     var dummyClientId = "1";
     var basket = Basket.withoutId(dummyClientId);
-    var item = new BasketItem(String.valueOf(1), givenQuantity);
+    var item = BasketItem.create(String.valueOf(1), givenQuantity);
     basket.addItem(item);
     var decreasingQuantity = 1;
     var expected = givenQuantity - decreasingQuantity;
@@ -163,7 +163,7 @@ class BasketTest {
   void throwExceptionWhenDecreaseOneItemIfItemDoesNotExist() {
     var dummyClientId = "1";
     var basket = Basket.withoutId(dummyClientId);
-    var item = new BasketItem(String.valueOf(1));
+    var item = BasketItem.create(String.valueOf(1));
 
     assertThatThrownBy(() -> basket.decreaseItemQuantity(item))
         .isInstanceOf(BasketItemNotFoundException.class);
@@ -174,8 +174,8 @@ class BasketTest {
   void getItemsCount() {
     var dummyClientId = "1";
     var basket = Basket.withoutId(dummyClientId);
-    basket.addItem(new BasketItem(String.valueOf(1)));
-    basket.addItem(new BasketItem(String.valueOf(2)));
+    basket.addItem(BasketItem.create(String.valueOf(1)));
+    basket.addItem(BasketItem.create(String.valueOf(2)));
 
     assertThat(basket.getItemsCount()).isEqualTo(2);
   }
@@ -186,7 +186,7 @@ class BasketTest {
     var dummyClientId = "1";
     var basket = Basket.withoutId(dummyClientId);
     var givenQuantity = 10;
-    var item = new BasketItem(String.valueOf(1), givenQuantity);
+    var item = BasketItem.create(String.valueOf(1), givenQuantity);
     basket.addItem(item);
 
     assertThat(basket.getItemQuantity(item)).isEqualTo(givenQuantity);
@@ -198,7 +198,7 @@ class BasketTest {
     var dummyClientId = "1";
     var basket = Basket.withoutId(dummyClientId);
     var givenQuantity = 10;
-    var item = new BasketItem(String.valueOf(1), givenQuantity);
+    var item = BasketItem.create(String.valueOf(1), givenQuantity);
 
     assertThatThrownBy(() -> basket.getItemQuantity(item))
         .isInstanceOf(BasketItemNotFoundException.class);
