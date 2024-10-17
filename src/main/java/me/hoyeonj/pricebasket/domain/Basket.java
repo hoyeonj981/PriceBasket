@@ -11,22 +11,22 @@ public class Basket {
 
   private final BasketId basketId;
   private final List<BasketItem> items;
-  private final String userId;
+  private final String clientId;
   private final LocalDateTime createdAt;
   private LocalDateTime updatedAt;
 
-  public static Basket withoutId(final String userId) {
-    return new Basket(BasketId.create(), new ArrayList<>(), userId);
+  public static Basket withoutId(final String clientId) {
+    return new Basket(BasketId.create(), new ArrayList<>(), clientId);
   }
 
-  public static Basket withId(final String basketId, final String userId) {
-    return new Basket(BasketId.from(basketId), new ArrayList<>(), userId);
+  public static Basket withId(final String basketId, final String clientId) {
+    return new Basket(BasketId.from(basketId), new ArrayList<>(), clientId);
   }
 
-  private Basket(final BasketId basketId, final List<BasketItem> items, final String userId) {
+  private Basket(final BasketId basketId, final List<BasketItem> items, final String clientId) {
     this.basketId = basketId;
     this.items = items;
-    this.userId = userId;
+    this.clientId = clientId;
     this.createdAt = LocalDateTime.now();
     this.updatedAt = createdAt;
   }
@@ -127,12 +127,12 @@ public class Basket {
       return false;
     }
     final Basket basket = (Basket) o;
-    return Objects.equals(basketId, basket.basketId) && Objects.equals(items,
-        basket.items) && Objects.equals(createdAt, basket.createdAt);
+    return Objects.equals(basketId, basket.basketId) && Objects.equals(clientId,
+        basket.clientId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(basketId, items, createdAt);
+    return Objects.hash(basketId, clientId);
   }
 }
