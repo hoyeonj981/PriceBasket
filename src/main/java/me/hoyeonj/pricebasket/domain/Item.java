@@ -76,12 +76,24 @@ public class Item {
     return itemInfo.getTotalPrice();
   }
 
+  public String getTotalPriceToString() {
+    return getTotalPrice().getValue().toPlainString();
+  }
+
   public PriceWon getUnitPrice() {
     return itemInfo.getUnitPrice();
   }
 
   public MeasurementType getMeasurementType() {
     return itemInfo.getMeasurementType();
+  }
+
+  public String getMeasurementTypeToString() {
+    return getMeasurementType().toString();
+  }
+
+  public String getUnitSymbol() {
+    return getMeasurementType().getSymbol();
   }
 
   public BigDecimal getTotalAmount() {
@@ -96,8 +108,16 @@ public class Item {
     return itemInfo.getItemDetails();
   }
 
+  public String getDetailsUrlToString() {
+    return getDetailsUrl().getValue();
+  }
+
   public ItemUrl getImageUrl() {
     return itemInfo.getItemImage();
+  }
+
+  public String getImageUrlToString() {
+    return getImageUrl().getValue();
   }
 
   public MallType getMallType() {
