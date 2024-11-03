@@ -8,6 +8,13 @@ public record SearchedItems(
     int itemsCount
 ) {
 
+  public SearchedItems(final List<SearchedItem> items, final SearchStatus status,
+      final int itemsCount) {
+    this.items = List.copyOf(items);
+    this.status = status;
+    this.itemsCount = itemsCount;
+  }
+
   public static SearchedItems success(final List<SearchedItem> searchedItems) {
     return new SearchedItems(
         searchedItems,
@@ -26,5 +33,13 @@ public record SearchedItems(
 
   public boolean hasResults() {
     return status == SearchStatus.SUCCESS & itemsCount > 0;
+  }
+
+  public List<SearchedItem> items() {
+    return List.copyOf(this.items);
+  }
+
+  public SearchedItems copy() {
+    return new SearchedItems(List.copyOf(this.items), this.status, this.itemsCount);
   }
 }
