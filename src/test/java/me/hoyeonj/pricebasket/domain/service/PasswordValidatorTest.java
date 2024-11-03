@@ -1,4 +1,4 @@
-package me.hoyeonj.pricebasket.domain;
+package me.hoyeonj.pricebasket.domain.service;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -7,11 +7,14 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 
 import java.util.Arrays;
+import me.hoyeonj.pricebasket.domain.InvalidPasswordException;
+import me.hoyeonj.pricebasket.domain.PasswordRule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
@@ -35,7 +38,7 @@ class PasswordValidatorTest {
   void throwExceptionIfPasswordIsInvalidAndViolationIsOne() {
     var givenPassword = "invalidPassword";
     var message1 = "password violation 1";
-    doThrow(new InvalidPasswordException(message1)).when(rule1).validate(givenPassword);
+    Mockito.doThrow(new InvalidPasswordException(message1)).when(rule1).validate(givenPassword);
 
     assertThatThrownBy(() -> passwordValidator.validate(givenPassword))
         .isInstanceOf(InvalidPasswordException.class)
