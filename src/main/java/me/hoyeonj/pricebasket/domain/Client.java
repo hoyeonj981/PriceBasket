@@ -1,6 +1,7 @@
 package me.hoyeonj.pricebasket.domain;
 
 import java.util.Objects;
+import me.hoyeonj.pricebasket.domain.service.PasswordValidator;
 
 public class Client {
 

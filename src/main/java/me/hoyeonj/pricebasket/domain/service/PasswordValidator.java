@@ -1,8 +1,10 @@
-package me.hoyeonj.pricebasket.domain;
+package me.hoyeonj.pricebasket.domain.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import me.hoyeonj.pricebasket.domain.InvalidPasswordException;
+import me.hoyeonj.pricebasket.domain.PasswordRule;
 
 public class PasswordValidator {
 
