@@ -110,8 +110,20 @@ public class Basket {
     return this.items.size();
   }
 
+  public String getClientId() {
+    return this.clientId;
+  }
+
+  public String getBasketId() {
+    return this.basketId.getValue();
+  }
+
+  public LocalDateTime getCreatedAt() {
+    return this.createdAt;
+  }
+
   public LocalDateTime getUpdatedAt() {
-    return updatedAt;
+    return this.updatedAt;
   }
 
   private void updateModificationTime() {
