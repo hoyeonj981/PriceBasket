@@ -10,6 +10,7 @@ import me.hoyeonj.pricebasket.application.in.dto.RegistrationCommand;
 import me.hoyeonj.pricebasket.application.in.dto.RegistrationResult;
 import me.hoyeonj.pricebasket.application.out.ClientRepository;
 import me.hoyeonj.pricebasket.domain.Client;
+import me.hoyeonj.pricebasket.domain.InvalidEmailException;
 import me.hoyeonj.pricebasket.domain.PasswordEncoder;
 import me.hoyeonj.pricebasket.domain.service.PasswordValidator;
 import org.junit.jupiter.api.DisplayName;
@@ -46,7 +47,7 @@ class ClientRegistrationServiceTest {
         .isInstanceOf(DuplicateEmailException.class);
   }
 
-  @DisplayName("유요한 정보로 사용자를 생성한다")
+  @DisplayName("유효한 정보로 사용자를 생성한다")
   @Test
   void createClientWithValidInformation() {
     var givenMail = "tester@test.com";
@@ -63,5 +64,16 @@ class ClientRegistrationServiceTest {
     var actual = registrationService.register(command);
 
     assertThat(actual).isEqualTo(expected);
+  }
+
+  @DisplayName("올바르지 않는 이메일 형식은 도메인 예외가 발생한다")
+  @Test
+  void throwDomainExceptionIfEmailFormatIsInvalid() {
+    var givenMail = "adfasdfsdafsdfssdfsdavxczvEmail";
+    var givenPassword = "helloworld123!";
+    var command = new RegistrationCommand(givenMail, givenPassword);
+
+    assertThatThrownBy(() -> registrationService.register(command))
+        .isInstanceOf(InvalidEmailException.class);
   }
 }
