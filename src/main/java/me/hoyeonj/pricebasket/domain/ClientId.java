@@ -15,7 +15,7 @@ public class ClientId {
     return new ClientId("guest-" + UUID.randomUUID().toString());
   }
 
-  static ClientId from(final String id) {
+  public static ClientId from(final String id) {
     return new ClientId(id);
   }
 
