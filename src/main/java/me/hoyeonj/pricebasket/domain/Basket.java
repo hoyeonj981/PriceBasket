@@ -10,25 +10,32 @@ import java.util.function.Predicate;
 public class Basket {
 
   private final BasketId basketId;
+  private final MallType mallType;
   private final List<BasketItem> items;
   private final String clientId;
   private final LocalDateTime createdAt;
   private LocalDateTime updatedAt;
 
-  public static Basket withoutId(final String clientId) {
-    return new Basket(BasketId.create(), new ArrayList<>(), clientId);
+  public static Basket withoutId(final String clientId, final MallType mallType) {
+    return new Basket(BasketId.create(), mallType, new ArrayList<>(), clientId);
   }
 
-  public static Basket withId(final String basketId, final String clientId) {
-    return new Basket(BasketId.from(basketId), new ArrayList<>(), clientId);
+  public static Basket withId(final String basketId, final String clientId, final MallType mallType) {
+    return new Basket(BasketId.from(basketId), mallType, new ArrayList<>(), clientId);
   }
 
-  private Basket(final BasketId basketId, final List<BasketItem> items, final String clientId) {
+  public Basket(
+      final BasketId basketId,
+      final MallType mallType,
+      final List<BasketItem> items,
+      final String clientId
+  ) {
     this.basketId = basketId;
+    this.mallType = mallType;
     this.items = items;
     this.clientId = clientId;
     this.createdAt = LocalDateTime.now();
-    this.updatedAt = createdAt;
+    this.updatedAt = this.createdAt;
   }
 
   public void clear() {
@@ -124,6 +131,10 @@ public class Basket {
 
   public LocalDateTime getUpdatedAt() {
     return this.updatedAt;
+  }
+
+  public String getBasketMallName() {
+    return mallType.getName();
   }
 
   private void updateModificationTime() {

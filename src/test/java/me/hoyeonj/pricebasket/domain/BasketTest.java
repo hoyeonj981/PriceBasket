@@ -8,11 +8,14 @@ import org.junit.jupiter.api.Test;
 
 class BasketTest {
 
+  public static final String DUMMY_MART_NAME = "emart";
+
   @DisplayName("장바구니의 모든 상품을 비운다")
   @Test
   void clearAllBasketItems() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
     basket.addItem(BasketItem.create(String.valueOf(1)));
     basket.addItem(BasketItem.create(String.valueOf(2)));
     basket.addItem(BasketItem.create(String.valueOf(3)));
@@ -28,7 +31,8 @@ class BasketTest {
   @Test
   void addBasketItems() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
     var expected = 3;
 
     basket.addItem(BasketItem.create(String.valueOf(1)));
@@ -42,7 +46,8 @@ class BasketTest {
   @Test
   void removeBasketItems() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
     var item = BasketItem.create(String.valueOf(1));
     basket.addItem(item);
     basket.addItem(BasketItem.create(String.valueOf(2)));
@@ -58,7 +63,8 @@ class BasketTest {
   @Test
   void throwExceptionWhenRemoveItemIfItemDoesNotExist() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
     var item = BasketItem.create(String.valueOf(1));
 
     assertThatThrownBy(() -> basket.removeItem(item))
@@ -70,7 +76,8 @@ class BasketTest {
   void increaseBasketItemQuantity() {
     var givenQuantity = 5;
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
     var item = BasketItem.create(String.valueOf(1));
     basket.addItem(item);
     var expected = givenQuantity + 1;
@@ -84,7 +91,8 @@ class BasketTest {
   @Test
   void throwExceptionWhenIncreaseItemIfItemDoesNotExist() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
     var item = BasketItem.create(String.valueOf(1));
 
     assertThatThrownBy(() -> basket.increaseItemQuantity(item, 10))
@@ -95,7 +103,8 @@ class BasketTest {
   @Test
   void increaseOneBasketItemQuantity() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
     var item = BasketItem.create(String.valueOf(1));
     basket.addItem(item);
 
@@ -108,7 +117,8 @@ class BasketTest {
   @Test
   void throwExceptionWhenIncreaseOneItemIfItemDoesNotExist() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
     var item = BasketItem.create(String.valueOf(1));
 
     assertThatThrownBy(() -> basket.increaseItemQuantity(item))
@@ -120,7 +130,8 @@ class BasketTest {
   void decreaseBasketItemQuantity() {
     var givenQuantity = 5;
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
     var item = BasketItem.create(String.valueOf(1), givenQuantity);
     basket.addItem(item);
     var decreasingQuantity = 2;
@@ -135,7 +146,8 @@ class BasketTest {
   @Test
   void throwExceptionWhenDecreaseItemIfItemDoesNotExist() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
     var item = BasketItem.create(String.valueOf(1));
 
     assertThatThrownBy(() -> basket.decreaseItemQuantity(item, 10))
@@ -147,7 +159,8 @@ class BasketTest {
   void decreaseOneBasketItemQuantity() {
     var givenQuantity = 5;
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
     var item = BasketItem.create(String.valueOf(1), givenQuantity);
     basket.addItem(item);
     var decreasingQuantity = 1;
@@ -162,7 +175,8 @@ class BasketTest {
   @Test
   void throwExceptionWhenDecreaseOneItemIfItemDoesNotExist() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
     var item = BasketItem.create(String.valueOf(1));
 
     assertThatThrownBy(() -> basket.decreaseItemQuantity(item))
@@ -173,7 +187,8 @@ class BasketTest {
   @Test
   void getItemsCount() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
     basket.addItem(BasketItem.create(String.valueOf(1)));
     basket.addItem(BasketItem.create(String.valueOf(2)));
 
@@ -184,7 +199,8 @@ class BasketTest {
   @Test
   void getAllItemsQuantity() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
     var givenQuantity = 10;
     var item = BasketItem.create(String.valueOf(1), givenQuantity);
     basket.addItem(item);
@@ -196,7 +212,8 @@ class BasketTest {
   @Test
   void throwExceptionWhenGetItemQuantityIfItemDoesNotExist() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
     var givenQuantity = 10;
     var item = BasketItem.create(String.valueOf(1), givenQuantity);
 
@@ -211,8 +228,9 @@ class BasketTest {
     var dummyClientId2 = dummyClientId1;
     var dummyBasketId1 = "B1";
     var dummyBasketId2 = dummyBasketId1;
-    var basket1 = Basket.withId(dummyBasketId1, dummyClientId1);
-    var basket2 = Basket.withId(dummyBasketId2, dummyClientId2);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket1 = Basket.withId(dummyBasketId1, dummyClientId1, givenMart);
+    var basket2 = Basket.withId(dummyBasketId2, dummyClientId2, givenMart);
 
     assertThat(basket1).isEqualTo(basket2);
   }
@@ -224,8 +242,9 @@ class BasketTest {
     var dummyClientId2 = dummyClientId1;
     var dummyBasketId1 = "B1";
     var dummyBasketId2 = dummyBasketId1;
-    var basket1 = Basket.withId(dummyBasketId1, dummyClientId1);
-    var basket2 = Basket.withId(dummyBasketId2, dummyClientId2);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket1 = Basket.withId(dummyBasketId1, dummyClientId1, givenMart);
+    var basket2 = Basket.withId(dummyBasketId2, dummyClientId2, givenMart);
 
     assertThat(basket1.hashCode()).isEqualTo(basket2.hashCode());
   }
