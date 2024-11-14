@@ -1,8 +1,9 @@
 package me.hoyeonj.pricebasket.application.in.dto;
 
-import java.util.Map;
+import java.util.List;
 
 public record BasketResult(
-    Map<MartType, BasketItems> result
+    List<BasketItem> items,
+    String totalPrice
 ) {
 }
