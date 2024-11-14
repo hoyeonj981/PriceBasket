@@ -113,6 +113,12 @@ public class Basket {
         .orElseThrow(BasketItemNotFoundException::new);
   }
 
+  public PriceWon getTotalItemsPrice() {
+    return items.stream()
+        .map(BasketItem::getItemPrice)
+        .reduce(PriceWon.ZERO, PriceWon::add);
+  }
+
   public int getItemsCount() {
     return this.items.size();
   }

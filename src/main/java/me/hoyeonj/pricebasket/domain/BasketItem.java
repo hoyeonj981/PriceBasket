@@ -46,6 +46,10 @@ public class BasketItem {
     return this.quantity.getValue();
   }
 
+  public PriceWon getItemPrice() {
+    return this.singlePrice.multiplyQuantity(this.quantity.getValue());
+  }
+
   @Override
   public boolean equals(final Object o) {
     if (this == o) {

@@ -236,6 +236,34 @@ class BasketTest {
         .isInstanceOf(BasketItemNotFoundException.class);
   }
 
+  @DisplayName("가지고 있는 모든 상품의 가격을 계산한다")
+  @Test
+  void calculateItemsPrice() {
+    var dummyClientId = "1";
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
+    var givenQuantity1 = 1;
+    var givenQuantity2 = 3;
+    var givenQuantity3 = 5;
+    var price1 = 1000;
+    var price2 = 2000;
+    var price3 = 1500;
+    var givenPrice1 = PriceWon.of(price1);
+    var givenPrice2 = PriceWon.of(price2);
+    var givenPrice3 = PriceWon.of(price3);
+    var item1 = BasketItem.create(String.valueOf(1), givenPrice1, givenQuantity1);
+    var item2 = BasketItem.create(String.valueOf(2), givenPrice2, givenQuantity2);
+    var item3 = BasketItem.create(String.valueOf(3), givenPrice3, givenQuantity3);
+    var expected = PriceWon.of(price1 * givenQuantity1 + price2 * givenQuantity2 + price3 * givenQuantity3);
+    basket.addItem(item1);
+    basket.addItem(item2);
+    basket.addItem(item3);
+
+    var actual = basket.getTotalItemsPrice();
+
+    assertThat(actual).isEqualTo(expected);
+  }
+
   @DisplayName("Client id와 Basket id가 같다면 같은 객체이다")
   @Test
   void sameObjectWhenClientIdAndBasketIdIsSame() {

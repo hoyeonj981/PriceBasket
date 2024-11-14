@@ -88,6 +88,21 @@ class BasketItemTest {
     assertThat(actual).isEqualTo(expected);
   }
 
+  @DisplayName("BasketItem의 가격은 (지정된 가격 x 수량)이다")
+  @Test
+  void basketItemPriceIsSpecifiedPriceMultipliedQuantity() {
+    var givenId = "1";
+    var givenQuantity = 3;
+    var givenPrice = 1000;
+    var price = PriceWon.of(givenPrice);
+    var basketItem = BasketItem.create(givenId, price, givenQuantity);
+    var expected = PriceWon.of(givenPrice * givenQuantity);
+
+    var actual = basketItem.getItemPrice();
+
+    assertThat(actual).isEqualTo(expected);
+  }
+
   @DisplayName("BasketItem은 ItemId 값이 같다면 같은 객체이다")
   @Test
   void sameObjectWhenItemIdIsSame() {
