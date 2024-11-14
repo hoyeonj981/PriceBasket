@@ -5,18 +5,20 @@ import java.util.Objects;
 public class BasketItem {
 
   private final String itemId;
+  private final PriceWon singlePrice;
   private final Quantity quantity;
 
-  public static BasketItem create(final String itemId, final int quantity) {
-    return new BasketItem(itemId, new Quantity(quantity));
+  public static BasketItem create(final String itemId, final PriceWon price, final int quantity) {
+    return new BasketItem(itemId, price, new Quantity(quantity));
   }
 
-  public static BasketItem create(final String itemId) {
-    return new BasketItem(itemId, new Quantity(1));
+  public static BasketItem create(final String itemId, final PriceWon price) {
+    return new BasketItem(itemId, price, new Quantity(1));
   }
 
-  private BasketItem(final String itemId, final Quantity quantity) {
+  public BasketItem(final String itemId, final PriceWon singlePrice, final Quantity quantity) {
     this.itemId = itemId;
+    this.singlePrice = singlePrice;
     this.quantity = quantity;
   }
 

@@ -11,8 +11,9 @@ class BasketItemTest {
   @Test
   void createBasketItemWWithId() {
     var givenId = "1";
+    var price = PriceWon.of("1000");
 
-    var actual = BasketItem.create(givenId);
+    var actual = BasketItem.create(givenId, price);
 
     assertThat(actual.getItemId()).isEqualTo(givenId);
     assertThat(actual.getQuantity()).isEqualTo(1);
@@ -23,8 +24,9 @@ class BasketItemTest {
   void createBasketItemWithIdAndQuantity() {
     var givenId = "1";
     var givenQuantity = 5;
+    var price = PriceWon.of("1000");
 
-    var actual = BasketItem.create(givenId, givenQuantity);
+    var actual = BasketItem.create(givenId, price, givenQuantity);
 
     assertThat(actual.getItemId()).isEqualTo(givenId);
     assertThat(actual.getQuantity()).isEqualTo(givenQuantity);
@@ -35,7 +37,8 @@ class BasketItemTest {
   void increaseQuantityWithGivenAmount() {
     var givenId = "1";
     var givenAmount = 3;
-    var basketItem = BasketItem.create(givenId);
+    var price = PriceWon.of("1000");
+    var basketItem = BasketItem.create(givenId, price);
     var expected = givenAmount + 1;
 
     var actual = basketItem.increaseQuantity(givenAmount);
@@ -48,7 +51,8 @@ class BasketItemTest {
   void increaseQuantityOne() {
     var givenId = "1";
     var givenAmount = 3;
-    var basketItem = BasketItem.create(givenId, givenAmount);
+    var price = PriceWon.of("1000");
+    var basketItem = BasketItem.create(givenId, price, givenAmount);
     var expected = givenAmount + 1;
 
     var actual = basketItem.increaseQuantityOne();
@@ -61,7 +65,8 @@ class BasketItemTest {
   void decreaseQuantityWithGivenAmount() {
     var givenId = "1";
     var givenQuantity = 5;
-    var basketItem = BasketItem.create(givenId, givenQuantity);
+    var price = PriceWon.of("1000");
+    var basketItem = BasketItem.create(givenId, price, givenQuantity);
     var expected = 3;
 
     var actual = basketItem.decreaseQuantity(givenQuantity - expected);
@@ -74,7 +79,8 @@ class BasketItemTest {
   void decreaseQuantityOne() {
     var givenId = "1";
     var givenQuantity = 3;
-    var basketItem = BasketItem.create(givenId, givenQuantity);
+    var price = PriceWon.of("1000");
+    var basketItem = BasketItem.create(givenId, price, givenQuantity);
     var expected = givenQuantity - 1;
 
     var actual = basketItem.decreaseQuantityOne();
@@ -87,9 +93,10 @@ class BasketItemTest {
   void sameObjectWhenItemIdIsSame() {
     var givenId1 = "1";
     var givenId2 = givenId1;
+    var price = PriceWon.of("1000");
 
-    var basketItem1 = BasketItem.create(givenId1);
-    var basketItem2 = BasketItem.create(givenId2);
+    var basketItem1 = BasketItem.create(givenId1, price);
+    var basketItem2 = BasketItem.create(givenId2, price);
 
     assertThat(basketItem1).isEqualTo(basketItem2);
   }
@@ -99,9 +106,10 @@ class BasketItemTest {
   void sameHashCodeWhenItemIdIsSame() {
     var givenId1 = "1";
     var givenId2 = givenId1;
+    var price = PriceWon.of("1000");
 
-    var basketItem1 = BasketItem.create(givenId1);
-    var basketItem2 = BasketItem.create(givenId2);
+    var basketItem1 = BasketItem.create(givenId1, price);
+    var basketItem2 = BasketItem.create(givenId2, price);
 
     assertThat(basketItem1.hashCode()).isEqualTo(basketItem2.hashCode());
   }

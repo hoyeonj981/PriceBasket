@@ -16,9 +16,10 @@ class BasketTest {
     var dummyClientId = "1";
     var givenMart = MallType.from(DUMMY_MART_NAME);
     var basket = Basket.withoutId(dummyClientId, givenMart);
-    basket.addItem(BasketItem.create(String.valueOf(1)));
-    basket.addItem(BasketItem.create(String.valueOf(2)));
-    basket.addItem(BasketItem.create(String.valueOf(3)));
+    var price = PriceWon.of("1000");
+    basket.addItem(BasketItem.create(String.valueOf(1), price));
+    basket.addItem(BasketItem.create(String.valueOf(2), price));
+    basket.addItem(BasketItem.create(String.valueOf(3), price));
     var expected = 0;
 
     basket.clear();
@@ -33,11 +34,12 @@ class BasketTest {
     var dummyClientId = "1";
     var givenMart = MallType.from(DUMMY_MART_NAME);
     var basket = Basket.withoutId(dummyClientId, givenMart);
+    var price = PriceWon.of("1000");
     var expected = 3;
 
-    basket.addItem(BasketItem.create(String.valueOf(1)));
-    basket.addItem(BasketItem.create(String.valueOf(2)));
-    basket.addItem(BasketItem.create(String.valueOf(3)));
+    basket.addItem(BasketItem.create(String.valueOf(1), price));
+    basket.addItem(BasketItem.create(String.valueOf(2), price));
+    basket.addItem(BasketItem.create(String.valueOf(3), price));
 
     assertThat(basket.getItemsCount()).isEqualTo(expected);
   }
@@ -48,10 +50,11 @@ class BasketTest {
     var dummyClientId = "1";
     var givenMart = MallType.from(DUMMY_MART_NAME);
     var basket = Basket.withoutId(dummyClientId, givenMart);
-    var item = BasketItem.create(String.valueOf(1));
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price);
     basket.addItem(item);
-    basket.addItem(BasketItem.create(String.valueOf(2)));
-    basket.addItem(BasketItem.create(String.valueOf(3)));
+    basket.addItem(BasketItem.create(String.valueOf(2), price));
+    basket.addItem(BasketItem.create(String.valueOf(3), price));
     var expected = 2;
 
     basket.removeItem(item);
@@ -65,7 +68,8 @@ class BasketTest {
     var dummyClientId = "1";
     var givenMart = MallType.from(DUMMY_MART_NAME);
     var basket = Basket.withoutId(dummyClientId, givenMart);
-    var item = BasketItem.create(String.valueOf(1));
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price);
 
     assertThatThrownBy(() -> basket.removeItem(item))
         .isInstanceOf(BasketItemNotFoundException.class);
@@ -78,7 +82,8 @@ class BasketTest {
     var dummyClientId = "1";
     var givenMart = MallType.from(DUMMY_MART_NAME);
     var basket = Basket.withoutId(dummyClientId, givenMart);
-    var item = BasketItem.create(String.valueOf(1));
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price);
     basket.addItem(item);
     var expected = givenQuantity + 1;
 
@@ -93,7 +98,8 @@ class BasketTest {
     var dummyClientId = "1";
     var givenMart = MallType.from(DUMMY_MART_NAME);
     var basket = Basket.withoutId(dummyClientId, givenMart);
-    var item = BasketItem.create(String.valueOf(1));
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price);
 
     assertThatThrownBy(() -> basket.increaseItemQuantity(item, 10))
         .isInstanceOf(BasketItemNotFoundException.class);
@@ -105,7 +111,8 @@ class BasketTest {
     var dummyClientId = "1";
     var givenMart = MallType.from(DUMMY_MART_NAME);
     var basket = Basket.withoutId(dummyClientId, givenMart);
-    var item = BasketItem.create(String.valueOf(1));
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price);
     basket.addItem(item);
 
     basket.increaseItemQuantity(item);
@@ -119,7 +126,8 @@ class BasketTest {
     var dummyClientId = "1";
     var givenMart = MallType.from(DUMMY_MART_NAME);
     var basket = Basket.withoutId(dummyClientId, givenMart);
-    var item = BasketItem.create(String.valueOf(1));
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price);
 
     assertThatThrownBy(() -> basket.increaseItemQuantity(item))
         .isInstanceOf(BasketItemNotFoundException.class);
@@ -132,7 +140,8 @@ class BasketTest {
     var dummyClientId = "1";
     var givenMart = MallType.from(DUMMY_MART_NAME);
     var basket = Basket.withoutId(dummyClientId, givenMart);
-    var item = BasketItem.create(String.valueOf(1), givenQuantity);
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price, givenQuantity);
     basket.addItem(item);
     var decreasingQuantity = 2;
     var expected = givenQuantity - decreasingQuantity;
@@ -148,7 +157,8 @@ class BasketTest {
     var dummyClientId = "1";
     var givenMart = MallType.from(DUMMY_MART_NAME);
     var basket = Basket.withoutId(dummyClientId, givenMart);
-    var item = BasketItem.create(String.valueOf(1));
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price);
 
     assertThatThrownBy(() -> basket.decreaseItemQuantity(item, 10))
         .isInstanceOf(BasketItemNotFoundException.class);
@@ -161,7 +171,8 @@ class BasketTest {
     var dummyClientId = "1";
     var givenMart = MallType.from(DUMMY_MART_NAME);
     var basket = Basket.withoutId(dummyClientId, givenMart);
-    var item = BasketItem.create(String.valueOf(1), givenQuantity);
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price, givenQuantity);
     basket.addItem(item);
     var decreasingQuantity = 1;
     var expected = givenQuantity - decreasingQuantity;
@@ -177,7 +188,8 @@ class BasketTest {
     var dummyClientId = "1";
     var givenMart = MallType.from(DUMMY_MART_NAME);
     var basket = Basket.withoutId(dummyClientId, givenMart);
-    var item = BasketItem.create(String.valueOf(1));
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price);
 
     assertThatThrownBy(() -> basket.decreaseItemQuantity(item))
         .isInstanceOf(BasketItemNotFoundException.class);
@@ -189,8 +201,9 @@ class BasketTest {
     var dummyClientId = "1";
     var givenMart = MallType.from(DUMMY_MART_NAME);
     var basket = Basket.withoutId(dummyClientId, givenMart);
-    basket.addItem(BasketItem.create(String.valueOf(1)));
-    basket.addItem(BasketItem.create(String.valueOf(2)));
+    var price = PriceWon.of("1000");
+    basket.addItem(BasketItem.create(String.valueOf(1), price));
+    basket.addItem(BasketItem.create(String.valueOf(2), price));
 
     assertThat(basket.getItemsCount()).isEqualTo(2);
   }
@@ -202,7 +215,8 @@ class BasketTest {
     var givenMart = MallType.from(DUMMY_MART_NAME);
     var basket = Basket.withoutId(dummyClientId, givenMart);
     var givenQuantity = 10;
-    var item = BasketItem.create(String.valueOf(1), givenQuantity);
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price, givenQuantity);
     basket.addItem(item);
 
     assertThat(basket.getItemQuantity(item)).isEqualTo(givenQuantity);
@@ -215,7 +229,8 @@ class BasketTest {
     var givenMart = MallType.from(DUMMY_MART_NAME);
     var basket = Basket.withoutId(dummyClientId, givenMart);
     var givenQuantity = 10;
-    var item = BasketItem.create(String.valueOf(1), givenQuantity);
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price, givenQuantity);
 
     assertThatThrownBy(() -> basket.getItemQuantity(item))
         .isInstanceOf(BasketItemNotFoundException.class);
