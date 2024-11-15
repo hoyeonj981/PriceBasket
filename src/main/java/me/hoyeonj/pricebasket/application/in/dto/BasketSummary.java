@@ -1,9 +1,11 @@
 package me.hoyeonj.pricebasket.application.in.dto;
 
+import java.math.BigDecimal;
+
 public record BasketSummary(
     String basketId,
-    String totalPrice,
-    MartType martType
+    BigDecimal totalPrice,
+    String martName
 ) {
 
 }
