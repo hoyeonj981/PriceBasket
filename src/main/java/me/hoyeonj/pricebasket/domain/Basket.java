@@ -33,7 +33,8 @@ public class Basket {
   ) {
     this.basketId = basketId;
     this.mallType = mallType;
-    this.items = items;
+    this.items = new ArrayList<>(items.size());
+    Collections.copy(this.items, items);
     this.clientId = clientId;
     this.createdAt = LocalDateTime.now();
     this.updatedAt = this.createdAt;

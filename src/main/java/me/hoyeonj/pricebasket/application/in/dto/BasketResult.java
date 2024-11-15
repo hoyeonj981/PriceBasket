@@ -11,6 +11,14 @@ public record BasketResult(
     int totalItemsCount
 ) {
 
+  public BasketResult(final List<BasketItem> items, final BigDecimal totalPrice,
+      final String martName, final int totalItemsCount) {
+    this.items = List.copyOf(items);
+    this.totalPrice = totalPrice;
+    this.martName = martName;
+    this.totalItemsCount = totalItemsCount;
+  }
+
   public List<BasketItem> items() {
     return Collections.unmodifiableList(items);
   }

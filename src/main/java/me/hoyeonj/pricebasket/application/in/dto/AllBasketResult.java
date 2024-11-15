@@ -7,6 +7,10 @@ public record AllBasketResult(
     List<BasketSummary> values
 ) {
 
+  public AllBasketResult(final List<BasketSummary> values) {
+    this.values = List.copyOf(values);
+  }
+
   public List<BasketSummary> values() {
     return Collections.unmodifiableList(values);
   }
