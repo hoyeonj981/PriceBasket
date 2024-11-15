@@ -7,6 +7,7 @@ import me.hoyeonj.pricebasket.application.out.BasketCommandPort;
 import me.hoyeonj.pricebasket.application.out.ClientQueryPort;
 import me.hoyeonj.pricebasket.domain.Basket;
 import me.hoyeonj.pricebasket.domain.ClientId;
+import me.hoyeonj.pricebasket.domain.MallType;
 
 public class CreateBasketService implements CreateBasketUseCase {
 
@@ -23,7 +24,8 @@ public class CreateBasketService implements CreateBasketUseCase {
   public CreateBasketResult createBasket(final CreateBasketCommand command) {
     final var clientId = ClientId.from(command.clientId());
     validateExistingClient(clientId);
-    final var newBasket = Basket.withoutId(clientId.getValue());
+    final var martMall = MallType.from(command.martName());
+    final var newBasket = Basket.withoutId(clientId.getValue(), martMall);
     basketCommandPort.save(newBasket);
     return new CreateBasketResult(
         newBasket.getClientId(),

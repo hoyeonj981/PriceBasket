@@ -11,7 +11,7 @@ public class BasketId {
     return new BasketId(UUID.randomUUID().toString());
   }
 
-  static BasketId from(final String id) {
+  public static BasketId from(final String id) {
     return new BasketId(id);
   }
 

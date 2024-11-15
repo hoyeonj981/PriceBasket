@@ -2,6 +2,7 @@ package me.hoyeonj.pricebasket.domain;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -10,25 +11,33 @@ import java.util.function.Predicate;
 public class Basket {
 
   private final BasketId basketId;
+  private final MallType mallType;
   private final List<BasketItem> items;
   private final String clientId;
   private final LocalDateTime createdAt;
   private LocalDateTime updatedAt;
 
-  public static Basket withoutId(final String clientId) {
-    return new Basket(BasketId.create(), new ArrayList<>(), clientId);
+  public static Basket withoutId(final String clientId, final MallType mallType) {
+    return new Basket(BasketId.create(), mallType, new ArrayList<>(), clientId);
   }
 
-  public static Basket withId(final String basketId, final String clientId) {
-    return new Basket(BasketId.from(basketId), new ArrayList<>(), clientId);
+  public static Basket withId(final String basketId, final String clientId, final MallType mallType) {
+    return new Basket(BasketId.from(basketId), mallType, new ArrayList<>(), clientId);
   }
 
-  private Basket(final BasketId basketId, final List<BasketItem> items, final String clientId) {
+  public Basket(
+      final BasketId basketId,
+      final MallType mallType,
+      final List<BasketItem> items,
+      final String clientId
+  ) {
     this.basketId = basketId;
-    this.items = items;
+    this.mallType = mallType;
+    this.items = new ArrayList<>(items.size());
+    Collections.copy(this.items, items);
     this.clientId = clientId;
     this.createdAt = LocalDateTime.now();
-    this.updatedAt = createdAt;
+    this.updatedAt = this.createdAt;
   }
 
   public void clear() {
@@ -106,6 +115,12 @@ public class Basket {
         .orElseThrow(BasketItemNotFoundException::new);
   }
 
+  public PriceWon getTotalItemsPrice() {
+    return items.stream()
+        .map(BasketItem::getItemPrice)
+        .reduce(PriceWon.ZERO, PriceWon::add);
+  }
+
   public int getItemsCount() {
     return this.items.size();
   }
@@ -124,6 +139,14 @@ public class Basket {
 
   public LocalDateTime getUpdatedAt() {
     return this.updatedAt;
+  }
+
+  public String getBasketMallName() {
+    return mallType.getName();
+  }
+
+  public List<BasketItem> getItems() {
+    return Collections.unmodifiableList(this.items);
   }
 
   private void updateModificationTime() {

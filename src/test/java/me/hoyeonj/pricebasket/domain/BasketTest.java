@@ -8,14 +8,18 @@ import org.junit.jupiter.api.Test;
 
 class BasketTest {
 
+  public static final String DUMMY_MART_NAME = "emart";
+
   @DisplayName("장바구니의 모든 상품을 비운다")
   @Test
   void clearAllBasketItems() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
-    basket.addItem(BasketItem.create(String.valueOf(1)));
-    basket.addItem(BasketItem.create(String.valueOf(2)));
-    basket.addItem(BasketItem.create(String.valueOf(3)));
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
+    var price = PriceWon.of("1000");
+    basket.addItem(BasketItem.create(String.valueOf(1), price));
+    basket.addItem(BasketItem.create(String.valueOf(2), price));
+    basket.addItem(BasketItem.create(String.valueOf(3), price));
     var expected = 0;
 
     basket.clear();
@@ -28,12 +32,14 @@ class BasketTest {
   @Test
   void addBasketItems() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
+    var price = PriceWon.of("1000");
     var expected = 3;
 
-    basket.addItem(BasketItem.create(String.valueOf(1)));
-    basket.addItem(BasketItem.create(String.valueOf(2)));
-    basket.addItem(BasketItem.create(String.valueOf(3)));
+    basket.addItem(BasketItem.create(String.valueOf(1), price));
+    basket.addItem(BasketItem.create(String.valueOf(2), price));
+    basket.addItem(BasketItem.create(String.valueOf(3), price));
 
     assertThat(basket.getItemsCount()).isEqualTo(expected);
   }
@@ -42,11 +48,13 @@ class BasketTest {
   @Test
   void removeBasketItems() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
-    var item = BasketItem.create(String.valueOf(1));
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price);
     basket.addItem(item);
-    basket.addItem(BasketItem.create(String.valueOf(2)));
-    basket.addItem(BasketItem.create(String.valueOf(3)));
+    basket.addItem(BasketItem.create(String.valueOf(2), price));
+    basket.addItem(BasketItem.create(String.valueOf(3), price));
     var expected = 2;
 
     basket.removeItem(item);
@@ -58,8 +66,10 @@ class BasketTest {
   @Test
   void throwExceptionWhenRemoveItemIfItemDoesNotExist() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
-    var item = BasketItem.create(String.valueOf(1));
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price);
 
     assertThatThrownBy(() -> basket.removeItem(item))
         .isInstanceOf(BasketItemNotFoundException.class);
@@ -70,8 +80,10 @@ class BasketTest {
   void increaseBasketItemQuantity() {
     var givenQuantity = 5;
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
-    var item = BasketItem.create(String.valueOf(1));
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price);
     basket.addItem(item);
     var expected = givenQuantity + 1;
 
@@ -84,8 +96,10 @@ class BasketTest {
   @Test
   void throwExceptionWhenIncreaseItemIfItemDoesNotExist() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
-    var item = BasketItem.create(String.valueOf(1));
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price);
 
     assertThatThrownBy(() -> basket.increaseItemQuantity(item, 10))
         .isInstanceOf(BasketItemNotFoundException.class);
@@ -95,8 +109,10 @@ class BasketTest {
   @Test
   void increaseOneBasketItemQuantity() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
-    var item = BasketItem.create(String.valueOf(1));
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price);
     basket.addItem(item);
 
     basket.increaseItemQuantity(item);
@@ -108,8 +124,10 @@ class BasketTest {
   @Test
   void throwExceptionWhenIncreaseOneItemIfItemDoesNotExist() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
-    var item = BasketItem.create(String.valueOf(1));
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price);
 
     assertThatThrownBy(() -> basket.increaseItemQuantity(item))
         .isInstanceOf(BasketItemNotFoundException.class);
@@ -120,8 +138,10 @@ class BasketTest {
   void decreaseBasketItemQuantity() {
     var givenQuantity = 5;
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
-    var item = BasketItem.create(String.valueOf(1), givenQuantity);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price, givenQuantity);
     basket.addItem(item);
     var decreasingQuantity = 2;
     var expected = givenQuantity - decreasingQuantity;
@@ -135,8 +155,10 @@ class BasketTest {
   @Test
   void throwExceptionWhenDecreaseItemIfItemDoesNotExist() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
-    var item = BasketItem.create(String.valueOf(1));
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price);
 
     assertThatThrownBy(() -> basket.decreaseItemQuantity(item, 10))
         .isInstanceOf(BasketItemNotFoundException.class);
@@ -147,8 +169,10 @@ class BasketTest {
   void decreaseOneBasketItemQuantity() {
     var givenQuantity = 5;
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
-    var item = BasketItem.create(String.valueOf(1), givenQuantity);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price, givenQuantity);
     basket.addItem(item);
     var decreasingQuantity = 1;
     var expected = givenQuantity - decreasingQuantity;
@@ -162,8 +186,10 @@ class BasketTest {
   @Test
   void throwExceptionWhenDecreaseOneItemIfItemDoesNotExist() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
-    var item = BasketItem.create(String.valueOf(1));
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price);
 
     assertThatThrownBy(() -> basket.decreaseItemQuantity(item))
         .isInstanceOf(BasketItemNotFoundException.class);
@@ -173,9 +199,11 @@ class BasketTest {
   @Test
   void getItemsCount() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
-    basket.addItem(BasketItem.create(String.valueOf(1)));
-    basket.addItem(BasketItem.create(String.valueOf(2)));
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
+    var price = PriceWon.of("1000");
+    basket.addItem(BasketItem.create(String.valueOf(1), price));
+    basket.addItem(BasketItem.create(String.valueOf(2), price));
 
     assertThat(basket.getItemsCount()).isEqualTo(2);
   }
@@ -184,9 +212,11 @@ class BasketTest {
   @Test
   void getAllItemsQuantity() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
     var givenQuantity = 10;
-    var item = BasketItem.create(String.valueOf(1), givenQuantity);
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price, givenQuantity);
     basket.addItem(item);
 
     assertThat(basket.getItemQuantity(item)).isEqualTo(givenQuantity);
@@ -196,12 +226,42 @@ class BasketTest {
   @Test
   void throwExceptionWhenGetItemQuantityIfItemDoesNotExist() {
     var dummyClientId = "1";
-    var basket = Basket.withoutId(dummyClientId);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
     var givenQuantity = 10;
-    var item = BasketItem.create(String.valueOf(1), givenQuantity);
+    var price = PriceWon.of("1000");
+    var item = BasketItem.create(String.valueOf(1), price, givenQuantity);
 
     assertThatThrownBy(() -> basket.getItemQuantity(item))
         .isInstanceOf(BasketItemNotFoundException.class);
+  }
+
+  @DisplayName("가지고 있는 모든 상품의 가격을 계산한다")
+  @Test
+  void calculateItemsPrice() {
+    var dummyClientId = "1";
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket = Basket.withoutId(dummyClientId, givenMart);
+    var givenQuantity1 = 1;
+    var givenQuantity2 = 3;
+    var givenQuantity3 = 5;
+    var price1 = 1000;
+    var price2 = 2000;
+    var price3 = 1500;
+    var givenPrice1 = PriceWon.of(price1);
+    var givenPrice2 = PriceWon.of(price2);
+    var givenPrice3 = PriceWon.of(price3);
+    var item1 = BasketItem.create(String.valueOf(1), givenPrice1, givenQuantity1);
+    var item2 = BasketItem.create(String.valueOf(2), givenPrice2, givenQuantity2);
+    var item3 = BasketItem.create(String.valueOf(3), givenPrice3, givenQuantity3);
+    var expected = PriceWon.of(price1 * givenQuantity1 + price2 * givenQuantity2 + price3 * givenQuantity3);
+    basket.addItem(item1);
+    basket.addItem(item2);
+    basket.addItem(item3);
+
+    var actual = basket.getTotalItemsPrice();
+
+    assertThat(actual).isEqualTo(expected);
   }
 
   @DisplayName("Client id와 Basket id가 같다면 같은 객체이다")
@@ -211,8 +271,9 @@ class BasketTest {
     var dummyClientId2 = dummyClientId1;
     var dummyBasketId1 = "B1";
     var dummyBasketId2 = dummyBasketId1;
-    var basket1 = Basket.withId(dummyBasketId1, dummyClientId1);
-    var basket2 = Basket.withId(dummyBasketId2, dummyClientId2);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket1 = Basket.withId(dummyBasketId1, dummyClientId1, givenMart);
+    var basket2 = Basket.withId(dummyBasketId2, dummyClientId2, givenMart);
 
     assertThat(basket1).isEqualTo(basket2);
   }
@@ -224,8 +285,9 @@ class BasketTest {
     var dummyClientId2 = dummyClientId1;
     var dummyBasketId1 = "B1";
     var dummyBasketId2 = dummyBasketId1;
-    var basket1 = Basket.withId(dummyBasketId1, dummyClientId1);
-    var basket2 = Basket.withId(dummyBasketId2, dummyClientId2);
+    var givenMart = MallType.from(DUMMY_MART_NAME);
+    var basket1 = Basket.withId(dummyBasketId1, dummyClientId1, givenMart);
+    var basket2 = Basket.withId(dummyBasketId2, dummyClientId2, givenMart);
 
     assertThat(basket1.hashCode()).isEqualTo(basket2.hashCode());
   }
