@@ -2,6 +2,7 @@ package me.hoyeonj.pricebasket.domain;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -141,6 +142,10 @@ public class Basket {
 
   public String getBasketMallName() {
     return mallType.getName();
+  }
+
+  public List<BasketItem> getItems() {
+    return Collections.unmodifiableList(this.items);
   }
 
   private void updateModificationTime() {
